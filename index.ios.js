@@ -1,5 +1,4 @@
-import React from 'react-native';
+import React from 'react-native'
+import App from './src/App'
 
-import App from './src/App';
-
-React.AppRegistry.registerComponent('BristolPoundReactNative', () => App);
+React.AppRegistry.registerComponent('BristolPoundReactNative', () => App)
