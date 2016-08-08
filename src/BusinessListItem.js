@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
 });
 
 const BusinessListItem = props =>
-  <TouchableHighlight underlayColor='#dddddd'>
+  <TouchableHighlight onPress={() => props.businessClicked(props.business)}
+            underlayColor='#dddddd'>
     <View style={styles.container}>
       { props.business.image ? <Image style={styles.image} source={{uri: props.business.image.url}}/> : <View style={styles.placeholder}/> }
       <View style={styles.verticalStack}>

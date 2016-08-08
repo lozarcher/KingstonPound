@@ -14,6 +14,8 @@ class BusinessList extends Component {
   constructor(props) {
     super(props);
 
+    console.log('hi');
+
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.userName !== r2.userName
     });
@@ -22,12 +24,15 @@ class BusinessList extends Component {
     };
   }
 
+  _navigateToBusiness(business) {
+    this.props.navigator.push({
+      id: 'BusinessDetails',
+      business
+    });
+  }
+
   _renderRow(business) {
-    return <BusinessListItem business={business}/>;
-      // <TouchableHighlight onPress={() => console.log(business)}
-      //       underlayColor='#dddddd'>
-      //   <BusinessListItem business={business}/>
-      // </TouchableHighlight>;
+    return <BusinessListItem business={business} businessClicked={this._navigateToBusiness.bind(this)}/>;
   }
 
   render() {
