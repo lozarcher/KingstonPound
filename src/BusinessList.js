@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   ListView,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native';
 
 import BusinessListItem from './BusinessListItem';
@@ -23,6 +24,10 @@ class BusinessList extends Component {
 
   _renderRow(business) {
     return <BusinessListItem business={business}/>;
+      // <TouchableHighlight onPress={() => console.log(business)}
+      //       underlayColor='#dddddd'>
+      //   <BusinessListItem business={business}/>
+      // </TouchableHighlight>;
   }
 
   render() {

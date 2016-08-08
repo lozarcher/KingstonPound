@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { getBusinesses } from './api';
 import LoadingScreen from './LoadingScreen';
 import BusinessList from './BusinessList';
+import HomeScreen from './HomeScreen';
 
 class App extends Component {
   constructor() {
@@ -27,7 +28,7 @@ class App extends Component {
   render() {
     return  this.state.loading
         ? <LoadingScreen message={this.state.loadingMessage}/>
-        : <BusinessList businesses={this.state.businesses}/>;
+        : <HomeScreen businesses={this.state.businesses}/>;
   }
 }
 
