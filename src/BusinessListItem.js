@@ -17,8 +17,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    flex: 2.5,
-    fontWeight: 'bold'
+    flex: 2.5
   },
   image: {
     flex: 1
@@ -31,7 +30,8 @@ const styles = StyleSheet.create({
     flex: 2.5,
     flexDirection: 'column',
     alignItems: 'flex-start',
-    marginLeft: 10
+    marginLeft: 10,
+    height: 80
   }
 });
 
@@ -41,11 +41,9 @@ const BusinessListItem = props =>
     <View style={styles.container}>
       { props.business.image ? <Image style={styles.image} source={{uri: props.business.image.url}}/> : <View style={styles.placeholder}/> }
       <View style={styles.verticalStack}>
-        <Text>venue</Text>
         <Text style={styles.title} numberOfLines={1}>
           {props.business.name}
         </Text>
-        <Text>foo members</Text>
       </View>
     </View>
   </TouchableHighlight>;

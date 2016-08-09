@@ -1,11 +1,14 @@
 const BASE_URL = 'http://claymaa6.miniserver.com:8080/bristol-pound/'
+const USER = 'test1';
+const PASS = 'testing123';
+
+const headers = new Headers();
+headers.append("Authorization", 'Basic ' + btoa(USER + ':' + PASS));
 
 const apiRequest = (url) =>
-  fetch(url)
+  fetch(url, {headers})
     .then(response => response.text())
     .then(JSON.parse)
 
-export const getBusinesses = () => {
-    console.log(BASE_URL + 'business/');
-    return apiRequest(BASE_URL + 'business/');
-}
+export const getBusinesses = () =>
+  apiRequest(BASE_URL + 'business/');

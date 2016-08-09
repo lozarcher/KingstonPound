@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { getBusinesses } from './api';
+import { getBusinesses, authenticate } from './api';
 import LoadingScreen from './LoadingScreen';
 import BusinessList from './BusinessList';
 import HomeScreen from './HomeScreen';

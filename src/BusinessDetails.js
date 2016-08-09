@@ -5,59 +5,62 @@ import {
   Text,
   View,
   TouchableHighlight,
-  MapView
+  MapView,
+  Image
 } from 'react-native';
 
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
+
+const PRALLAX_HEIGHT = 200;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  title: {
-    fontSize: 30,
-    textAlign: 'center',
-    margin: 10,
-    flex: 1
-  },
   fullSize: {
     position: 'absolute',
     top: 0, bottom: 0, left: 0, right: 0
   },
-  message: {
-    backgroundColor: '#333333',
-    flex: 1,
-    borderBottomColor: 'red',
-    borderBottomWidth: 4
+  image: {
+    height: 150,
+    width: 150,
+    marginTop: -40,
+    alignSelf: 'center'
+  },
+  title: {
+    alignSelf: 'center',
+    marginTop: 20,
+    fontSize: 25
   }
 });
 
 const BusinessDetails = props =>
-    <View style={styles.container}>
-      <TouchableHighlight onPress={() => props.navigator.pop()}
-                  underlayColor='red'>
-        <Text style={styles.title}>
-          {props.business.name}
-        </Text>
-      </TouchableHighlight>
-      <View style={styles.message}>
-        <MapView
-          style={styles.fullSize}
-          showsUserLocation={true}
-          region={{
-            latitude: props.business.location.latitude,
-            longitude: props.business.location.longitude,
-            latitudeDelta: 0.005,
-            longitudeDelta: 0.005
-          }}
-          annotations={[{
-            longitude: props.business.location.longitude,
-            latitude: props.business.location.latitude
-          }]}>
-        </MapView>
-        <View style={styles.fullSize}>
+  <ParallaxScrollView
+      backgroundColor="white"
+      contentBackgroundColor="#eee"
+      parallaxHeaderHeight={PRALLAX_HEIGHT}
+      renderBackground={() => (
+        <View style={{height: PRALLAX_HEIGHT}}>
+          <MapView
+                style={styles.fullSize}
+                showsUserLocation={true}
+                region={{
+                  latitude: props.business.location.latitude,
+                  longitude: props.business.location.longitude,
+                  latitudeDelta: 0.005,
+                  longitudeDelta: 0.005
+                }}
+                annotations={[{
+                  longitude: props.business.location.longitude,
+                  latitude: props.business.location.latitude
+                }]}>
+              </MapView>
         </View>
+      )}>
+      <View style={{ height: 500 }}>
+        <TouchableHighlight onPress={() => props.navigator.pop()}
+            underlayColor='transparent'>
+          <Image style={styles.image} source={{uri: props.business.image.url}}/>
+        </TouchableHighlight>
+        <Text style={styles.title}>{props.business.name}</Text>
       </View>
-      <View style={styles.message}>
-      </View>
-    </View>
+    </ParallaxScrollView>
+
 export default BusinessDetails;
