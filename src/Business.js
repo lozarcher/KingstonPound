@@ -3,7 +3,7 @@ import { Text, Navigator } from 'react-native';
 import BusinessList from './BusinessList';
 import BusinessDetails from './BusinessDetails';
 
-export default class HomeScreen extends Component {
+export default class Business extends Component {
   render() {
     return (
       <Navigator
