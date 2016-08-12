@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Text, Navigator } from 'react-native';
-import BusinessList from './BusinessList';
-import BusinessDetails from './BusinessDetails';
+import React, { Component } from 'react'
+import { Navigator } from 'react-native'
+import BusinessList from './BusinessList'
+import BusinessDetails from './BusinessDetails'
 
 export default class Business extends Component {
   render() {
@@ -16,6 +16,6 @@ export default class Business extends Component {
           }
         }}
       />
-    );
+    )
   }
 }

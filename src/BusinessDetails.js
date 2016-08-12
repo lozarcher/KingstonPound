@@ -1,17 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react'
+import { StyleSheet, Text, View, TouchableHighlight, MapView, Image } from 'react-native'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  MapView,
-  Image
-} from 'react-native';
-
-import ParallaxScrollView from 'react-native-parallax-scroll-view';
-
-const PRALLAX_HEIGHT = 200;
+const PRALLAX_HEIGHT = 200
 
 const styles = StyleSheet.create({
   fullSize: {
@@ -29,12 +20,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 25
   }
-});
+})
 
 const BusinessDetails = props =>
   <ParallaxScrollView
-      backgroundColor="white"
-      contentBackgroundColor="#eee"
+      backgroundColor='white'
+      contentBackgroundColor='#eee'
       parallaxHeaderHeight={PRALLAX_HEIGHT}
       renderBackground={() => (
         <View style={{height: PRALLAX_HEIGHT}}>
@@ -63,4 +54,4 @@ const BusinessDetails = props =>
       </View>
     </ParallaxScrollView>
 
-export default BusinessDetails;
+export default BusinessDetails

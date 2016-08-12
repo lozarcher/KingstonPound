@@ -1,23 +1,12 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  ListView,
-  View,
-  TextInput,
-  TouchableHighlight
-} from 'react-native';
-
-import BusinessListItem from './BusinessListItem';
-import {getBusinesses} from './api';
-
-const styles = StyleSheet.create({
-});
+import React, { Component } from 'react'
+import { Text, ListView, View, TextInput } from 'react-native'
+import BusinessListItem from './BusinessListItem'
+import {getBusinesses} from './api'
 
 class BusinessList extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       loading: true
@@ -25,7 +14,7 @@ class BusinessList extends Component {
 
     this.ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.userName !== r2.userName
-    });
+    })
 
     getBusinesses()
       .then(businesses => {
@@ -35,7 +24,7 @@ class BusinessList extends Component {
               businesses
           })
       })
-      .catch(console.error);
+      .catch(console.error)
 
   }
 
@@ -43,22 +32,22 @@ class BusinessList extends Component {
     this.props.navigator.push({
       id: 'BusinessDetails',
       business
-    });
+    })
   }
 
   _renderRow(business) {
-    return <BusinessListItem business={business} businessClicked={this._navigateToBusiness.bind(this)}/>;
+    return <BusinessListItem business={business} businessClicked={this._navigateToBusiness.bind(this)}/>
   }
 
   _filterList(text) {
     const contains = (a, b) =>
-      a.toLowerCase().indexOf(b.toLowerCase()) !== -1;
+      a.toLowerCase().indexOf(b.toLowerCase()) !== -1
 
-    const filtered = this.state.businesses.filter(b => contains(b.name, text));
+    const filtered = this.state.businesses.filter(b => contains(b.name, text))
 
     this.setState({
       dataSource: this.ds.cloneWithRows(filtered)
-    });
+    })
   }
 
   render() {
@@ -81,4 +70,4 @@ class BusinessList extends Component {
   }
 }
 
-export default BusinessList;
+export default BusinessList

@@ -1,11 +1,5 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  Image
-} from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 
 
 const styles = StyleSheet.create({
@@ -33,7 +27,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     height: 80
   }
-});
+})
 
 const BusinessListItem = props =>
   <TouchableHighlight onPress={() => props.businessClicked(props.business)}
@@ -46,6 +40,6 @@ const BusinessListItem = props =>
         </Text>
       </View>
     </View>
-  </TouchableHighlight>;
+  </TouchableHighlight>
 
-export default BusinessListItem;
+export default BusinessListItem
