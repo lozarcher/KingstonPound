@@ -17,7 +17,7 @@ const apiRequest = (url, params) =>
 export const getBusinesses = () =>
   apiRequest('business/');
 
-export const getTransactions = () =>
+export const getTransactions = (page = 1) =>
   apiRequest('transaction', {
     pageNumber: 1,
     pageSize: 20

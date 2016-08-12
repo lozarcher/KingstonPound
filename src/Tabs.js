@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TabBarIOS, Text } from 'react-native';
+import { TabBarIOS, Text, View } from 'react-native';
 
 import Business from './Business';
 import TransactionsList from './TransactionsList';
@@ -41,7 +41,9 @@ export default class Tabs extends Component {
               selectedTab: 'transactions',
             });
           }}>
-          <TransactionsList/>
+          <View style={{marginBottom: 40, flex: 1}}>
+            <TransactionsList/>
+          </View>
         </TabBarIOS.Item>
       </TabBarIOS>
     );
