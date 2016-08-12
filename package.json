@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "base-64": "^0.1.0",
+    "dateformat": "^1.0.12",
     "react": "15.2.1",
     "react-native": "^0.31.0",
     "react-native-gifted-listview": "git+https://github.com/FaridSafi/react-native-gifted-listview.git",

@@ -7,7 +7,8 @@ const PASS = 'testing123';
 const headers = new Headers();
 headers.append("Authorization", 'Basic ' + encode(USER + ':' + PASS));
 
-const querystring = params => Object.keys(params).map(key => key + '=' + params[key]).join('&');
+const querystring = params =>
+  Object.keys(params).map(key => key + '=' + params[key]).join('&');
 
 const apiRequest = (url, params) =>
   fetch(BASE_URL + url + (params ? '?' + querystring : ''), {headers})
@@ -15,10 +16,13 @@ const apiRequest = (url, params) =>
     .then(JSON.parse)
 
 export const getBusinesses = () =>
-  apiRequest('business/');
+  apiRequest('business');
 
-export const getTransactions = (page = 1) =>
+export const getAccount = () =>
+  apiRequest('account');
+
+export const getTransactions = (pageNumber = 1) =>
   apiRequest('transaction', {
-    pageNumber: 1,
+    pageNumber,
     pageSize: 20
   });

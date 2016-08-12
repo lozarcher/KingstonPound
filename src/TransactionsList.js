@@ -9,16 +9,43 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import dateFormat from 'dateformat';
+
 const styles = StyleSheet.create({
   image: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#eee'
+    width: 40,
+    height: 40,
+    backgroundColor: '#eee',
+    borderRadius: 10
   }
 });
 
-import {getTransactions} from './api';
+import {getTransactions, getAccount} from './api';
 
+const defaultTextStyle = {
+  fontFamily: 'HelveticaNeue-Light',
+  fontSize: 18
+};
+
+const DefaultText = ({ style, children, ...otherProps }) =>
+  <Text style={Object.assign({}, defaultTextStyle, style)} {...otherProps}>
+    {children}
+  </Text>
+
+const groupTransactions = (transactions) => {
+  transactions = transactions.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+  let grouped = {};
+  let sectionIdentities = [];
+  transactions.forEach((transaction) => {
+    const category = dateFormat(new Date(transaction.dateTime), 'mmmm dS, yyyy');
+    if (sectionIdentities.indexOf(category) === -1) {
+      grouped[category] = [];
+      sectionIdentities.push(category);
+    }
+    grouped[category].push(transaction);
+  });
+  return {grouped, sectionIdentities};
+}
 
 class TransactionsList extends Component {
 
@@ -26,27 +53,41 @@ class TransactionsList extends Component {
     super(props);
 
     this.state = {
-      loading: true
+      loadingTransactions: true,
+      transaction: {},
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (a, b) => a.transactionNumber === b.transactionNumber,
+        sectionHeaderHasChanged: (a, b) => a == b
+      })
     };
 
-    this.ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1.transactionNumber !== r2.transactionNumber
-    });
+    getAccount()
+      .then(account => console.log(account));
 
     getTransactions()
-      .then(transactions => this.setState({
-        loading: false,
-        page: 1,
-        dataSource: this.ds.cloneWithRows(transactions),
-        transactions
-      }));
+      .then(transactions => {
+          const grouped = groupTransactions(transactions);
+          this.setState({
+            loadingTransactions: false,
+            page: 1,
+            dataSource: this.state.dataSource.cloneWithRowsAndSections(grouped.grouped, grouped.sectionIdentities),
+            transactions
+          })
+      });
   }
 
   _renderRow(transaction) {
+    const priceComponents = Math.abs(transaction.amount).toFixed(2).split('.');
+    const isCredit = transaction.amount > 0;
+    const color = isCredit ? '#484' : 'black';
     return (
-      <View style={{height: 50, flexDirection: 'row', margin: 5}}>
+      <View style={{flexDirection: 'row', margin: 8, alignItems: 'center'}}>
         { transaction.accountOwner.image ? <Image style={styles.image} source={{uri: transaction.accountOwner.image.url}}/> : <View style={styles.image} /> }
-        <Text style={{fontSize: 20, alignSelf: 'center', marginLeft: 10}}>{transaction.accountOwner.name}</Text>
+        <DefaultText style={{marginLeft: 10}}>{transaction.accountOwner.name}</DefaultText>
+        <View style={{flex: 1, justifyContent: 'flex-end', flexDirection: 'row'}}>
+          <DefaultText style={{fontSize: 25, color}}>{(isCredit ? '+' : '') + priceComponents[0]}</DefaultText>
+          <DefaultText style={{fontSize: 15, alignSelf: 'flex-end', marginBottom: 3, color}}>.{priceComponents[1]}</DefaultText>
+        </View>
       </View>
     );
   }
@@ -65,6 +106,18 @@ class TransactionsList extends Component {
       });
   }
 
+  _renderSectionHeader(sectionData, sectionID) {
+    return (
+      <View style={{height: 40, backgroundColor: '#efefef', flexDirection: 'row', borderBottomColor:'#ddd', borderBottomWidth: 1, borderTopColor:'#ddd', borderTopWidth: 1}}>
+        <DefaultText style={{fontSize: 15, fontWeight: 'bold', marginLeft: 8, alignSelf:'center'}}>{sectionID}</DefaultText>
+      </View>
+    )
+  }
+
+  _renderSeparator() {
+    return <View style={{marginLeft: 8, marginRight: 8, borderBottomColor:'#ddd', borderBottomWidth: 1}}/>
+  }
+
   _renderFooter() {
     return (
       <TouchableHighlight onPress={() => this._loadMore()}>
@@ -76,14 +129,30 @@ class TransactionsList extends Component {
   }
 
   render() {
-    return this.state.loading
-      ? <Text>Loading ...</Text>
-      : <ListView
-          style={{flex: 1, marginBottom: 20}}
-          pageSize={10}
-          dataSource={this.state.dataSource}
-          renderFooter={this._renderFooter.bind(this)}
-          renderRow={this._renderRow.bind(this)}/>
+    return (
+      <View style={{flex:1}}>
+        <View style={{backgroundColor: '#1480ba', flexDirection: 'row'}}>
+          <View style={{margin: 10, padding: 5, backgroundColor: '#34a0da', flex: 1}}>
+            <DefaultText style={{color: 'white', fontSize: 30}}>£23.56</DefaultText>
+            <DefaultText style={{color: '#ddd', fontSize: 15}}>Your account</DefaultText>
+          </View>
+          <View style={{margin: 10, padding: 5, backgroundColor: '#34a0da', flex: 1, alignItems: 'flex-end'}}>
+            <DefaultText style={{color: 'white', fontSize: 30}}>£0</DefaultText>
+            <DefaultText style={{color: '#ddd', fontSize: 15}}>Spent today</DefaultText>
+          </View>
+        </View>
+        {this.state.loadingTransactions
+        ? <Text>Loading ...</Text>
+        : <ListView
+            style={{flex: 1, marginBottom: 20}}
+            pageSize={10}
+            dataSource={this.state.dataSource}
+            renderSeparator={this._renderSeparator}
+            renderSectionHeader={this._renderSectionHeader}
+            renderFooter={this._renderFooter.bind(this)}
+            renderRow={this._renderRow.bind(this)}/>}
+      </View>
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TabBarIOS, Text, View } from 'react-native';
+import { TabBarIOS, Text, View, StatusBar } from 'react-native';
 
 import Business from './Business';
 import TransactionsList from './TransactionsList';
@@ -11,41 +11,44 @@ export default class Tabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'business'
+      selectedTab: 'transactions'
     };
   }
 
   render() {
     return (
-      <TabBarIOS
-        tintColor="white"
-        style={{marginTop: 20}}
-        barTintColor="darkslateblue">
-        <TabBarIOS.Item
-          title="Directory"
-          icon={{uri: base64Icon, scale: 3}}
-          selected={this.state.selectedTab === 'business'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'business',
-            });
-          }}>
-          <Business businesses={this.props.businesses}/>
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
-          title="Transactions"
-          icon={{uri: base64Icon, scale: 3}}
-          selected={this.state.selectedTab === 'transactions'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'transactions',
-            });
-          }}>
-          <View style={{marginBottom: 40, flex: 1}}>
-            <TransactionsList/>
-          </View>
-        </TabBarIOS.Item>
-      </TabBarIOS>
+      <View style={{backgroundColor: '#1480ba', flex: 1}}>
+        <StatusBar barStyle="light-content"/>
+        <TabBarIOS
+          tintColor="#1480ba"
+          style={{marginTop: 20, flex: 1, backgroundColor: 'white'}}
+          barTintColor="#eee">
+          <TabBarIOS.Item
+            title="Directory"
+            icon={{uri: base64Icon, scale: 3}}
+            selected={this.state.selectedTab === 'business'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'business',
+              });
+            }}>
+            <Business businesses={this.props.businesses}/>
+          </TabBarIOS.Item>
+          <TabBarIOS.Item
+            title="Transactions"
+            icon={{uri: base64Icon, scale: 3}}
+            selected={this.state.selectedTab === 'transactions'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'transactions',
+              });
+            }}>
+            <View style={{marginBottom: 30, flex: 1}}>
+              <TransactionsList/>
+            </View>
+          </TabBarIOS.Item>
+        </TabBarIOS>
+      </View>
     );
   }
 }
