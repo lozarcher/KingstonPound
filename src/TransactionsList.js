@@ -9,6 +9,10 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import GiftedListView  from 'react-native-gifted-listview';
+
+import {getTransactions} from './api';
+
 const styles = StyleSheet.create({
   image: {
     width: 50,
@@ -21,17 +25,14 @@ class TransactionsList extends Component {
 
   constructor(props) {
     super(props);
-
-    this.ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1.transactionNumber !== r2.transactionNumber
-    });
-
-    this.state = {
-      dataSource: this.ds.cloneWithRows(props.transactions)
-    };
   }
 
-  _renderRow(transaction) {
+  _onFetch(page = 1, callback, options) {
+    getTransactions()
+      .then(transactions => callback(transactions));
+  }
+
+  _renderRowView(transaction) {
     return (
       <View style={{height: 70, flexDirection: 'row'}}>
         { transaction.accountOwner.image ? <Image style={styles.image} source={{uri: transaction.accountOwner.image.url}}/> : <View style={styles.image} /> }
@@ -42,11 +43,20 @@ class TransactionsList extends Component {
 
   render() {
     return (
-        <ListView
-          style={{flex: 1}}
-          pageSize={10}
-          dataSource={this.state.dataSource}
-          renderRow={this._renderRow.bind(this)}/>
+      <GiftedListView
+        rowView={this._renderRowView}
+        onFetch={this._onFetch}
+        firstLoader={true} // display a loader for the first fetching
+        pagination={true} // enable infinite scrolling using touch to load more
+        withSections={false} // enable sections
+        refreshable={false}
+        customStyles={{
+          paginationView: {
+            backgroundColor: '#eee',
+          },
+        }}
+        refreshableTintColor="blue"
+      />
     )
   }
 }

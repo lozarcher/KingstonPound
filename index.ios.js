@@ -1,5 +1,5 @@
 import React from 'react-native';
 
-import App from './src/App';
+import Tabs from './src/Tabs';
 
-React.AppRegistry.registerComponent('BristolPoundReactNative', () => App);
+React.AppRegistry.registerComponent('BristolPoundReactNative', () => Tabs);
