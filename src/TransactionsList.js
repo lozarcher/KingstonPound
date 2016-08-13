@@ -1,30 +1,14 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, ListView, View, Image, ActivityIndicator, TouchableHighlight } from 'react-native'
+import { StyleSheet, ListView, View, Image, ActivityIndicator, TouchableHighlight } from 'react-native'
 import dateFormat from 'dateformat'
 import DefaultText from './DefaultText'
+import Price from './Price'
 import {getTransactions, getAccount} from './api'
+import merge from './merge'
+import BalanceHeader from './BalanceHeader'
 
 const borderColor = '#ddd'
 const marginSize = 8
-
-const Price = ({prefix, price, color, size}) => {
-  const priceComponents = Math.abs(price).toFixed(2).split('.')
-  const isCredit = price > 0
-  size = size || 25
-  const smallFontSize = size * 0.7
-  const margin = size * 0.08
-  color = color ? color : (isCredit ? '#484' : 'black')
-  prefix = prefix || (isCredit ? '+' : '')
-  return (
-    <View style={{flex: 1, justifyContent: 'flex-end', flexDirection: 'row'}}>
-      <DefaultText style={{fontSize: smallFontSize, alignSelf: 'flex-end', marginBottom: margin, color}}>{prefix}</DefaultText>
-      <DefaultText style={{fontSize: size, alignSelf: 'flex-end', color}}>{priceComponents[0]}</DefaultText>
-      <DefaultText style={{fontSize: smallFontSize, alignSelf: 'flex-end', marginBottom: margin, color}}>.{priceComponents[1]}</DefaultText>
-    </View>
-  )
-}
-
-const merge = (...args) => Object.assign({}, ...args)
 
 const styles = {
   image: {
@@ -116,7 +100,7 @@ class TransactionsList extends Component {
 
   _renderRow(transaction) {
     return (
-      <View style={styles.rowContainer}>
+      <View style={styles.rowContainer} key={transaction.transactionNumber}>
         { transaction.accountOwner.image ? <Image style={styles.image} source={{uri: transaction.accountOwner.image.url}}/> : <View style={styles.image} /> }
         <DefaultText style={{marginLeft: 10}}>{transaction.accountOwner.name}</DefaultText>
         <Price price={transaction.amount}/>
@@ -173,26 +157,17 @@ class TransactionsList extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <View style={{backgroundColor: '#1480ba', flexDirection: 'row'}}>
-          <View style={{margin: 10, padding: 5, backgroundColor: '#34a0da', flex: 1, alignItems: 'flex-start'}}>
-            <Price price={this.state.loadingBalance ? 0 : this.state.balance} prefix='£' color='white' size={35}/>
-            <DefaultText style={{color: '#ddd', fontSize: 15}}>Your account</DefaultText>
-          </View>
-          <View style={{margin: 10, padding: 5, backgroundColor: '#34a0da', flex: 1, alignItems: 'flex-end'}}>
-            <Price price={0} prefix='£' color='white' size={35}/>
-            <DefaultText style={{color: '#ddd', fontSize: 15}}>Spent today</DefaultText>
-          </View>
-        </View>
+        <BalanceHeader balance={this.state.balance} loadingBalance={this.state.loadingBalance}/>
         {this.state.loadingTransactions
-        ? <Text>Loading ...</Text>
-        : <ListView
-            style={{flex: 1, marginBottom: 20}}
-            pageSize={10}
-            dataSource={this.state.dataSource}
-            renderSeparator={this._renderSeparator}
-            renderSectionHeader={this._renderSectionHeader}
-            renderFooter={this._renderFooter.bind(this)}
-            renderRow={this._renderRow.bind(this)}/>}
+          ? <ActivityIndicator size='large' style={{flex: 1}}/>
+          : <ListView
+              style={{flex: 1, marginBottom: 20}}
+              pageSize={10}
+              dataSource={this.state.dataSource}
+              renderSeparator={this._renderSeparator}
+              renderSectionHeader={this._renderSectionHeader}
+              renderFooter={this._renderFooter.bind(this)}
+              renderRow={this._renderRow.bind(this)}/>}
       </View>
     )
   }
