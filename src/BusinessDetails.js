@@ -1,10 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, MapView, Image } from 'react-native'
+import { View, TouchableHighlight, MapView, Image } from 'react-native'
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
+import DefaultText from './DefaultText'
 
-const PRALLAX_HEIGHT = 200
+const parallaxHeight = 200
 
-const styles = StyleSheet.create({
+const style = {
+  title: {
+    alignSelf: 'center',
+    marginTop: 20,
+    fontSize: 25
+  },
   fullSize: {
     position: 'absolute',
     top: 0, bottom: 0, left: 0, right: 0
@@ -13,25 +19,21 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     marginTop: -40,
+    borderRadius: 20,
     alignSelf: 'center'
-  },
-  title: {
-    alignSelf: 'center',
-    marginTop: 20,
-    fontSize: 25
   }
-})
+}
 
 const BusinessDetails = props =>
   <ParallaxScrollView
       backgroundColor='white'
       contentBackgroundColor='#eee'
-      parallaxHeaderHeight={PRALLAX_HEIGHT}
+      parallaxHeaderHeight={parallaxHeight}
       renderBackground={() => (
-        <View style={{height: PRALLAX_HEIGHT}}>
+        <View style={{height: parallaxHeight}}>
           { props.business.location
             ? <MapView
-                style={styles.fullSize}
+                style={style.fullSize}
                 showsUserLocation={true}
                 region={{
                   latitude: props.business.location.latitude,
@@ -51,9 +53,9 @@ const BusinessDetails = props =>
       <View style={{ height: 500 }}>
         <TouchableHighlight onPress={() => props.navigator.pop()}
             underlayColor='transparent'>
-          <Image style={styles.image} source={{uri: props.business.image.url}}/>
+          <Image style={style.image} source={{uri: props.business.image.url}}/>
         </TouchableHighlight>
-        <Text style={styles.title}>{props.business.name}</Text>
+        <DefaultText style={style.title}>{props.business.name}</DefaultText>
       </View>
     </ParallaxScrollView>
 

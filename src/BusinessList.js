@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, ListView, View, TextInput } from 'react-native'
+import { ActivityIndicator, ListView, View, TextInput } from 'react-native'
 import BusinessListItem from './BusinessListItem'
 import {getBusinesses} from './api'
+import color from './colors'
 
 class BusinessList extends Component {
 
@@ -52,12 +53,12 @@ class BusinessList extends Component {
 
   render() {
     return this.state.loading
-      ? <Text>loading ...</Text>
+      ? <ActivityIndicator size='large' style={{flex: 1}}/>
       : (
         <View style={{flex: 1}}>
-          <View style={{backgroundColor: 'gray'}}>
+          <View style={{backgroundColor: color.bristolBlue}}>
             <TextInput placeholder='search'
-              style={{height: 30, margin: 10, backgroundColor: 'white'}}
+              style={{height: 30, margin: 10, backgroundColor: 'white', padding: 2}}
               onChangeText={this._filterList.bind(this)}/>
           </View>
           <ListView

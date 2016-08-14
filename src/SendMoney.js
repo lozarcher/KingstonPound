@@ -69,13 +69,13 @@ class SendMoney extends Component {
   }
 
   _send() {
-    putTransaction({
-      payeeUserName: this.state.payee,
-      description: 'This is a test',
-      amount: this.state.amount
-    })
-    .then((res) => console.log(res))
-    .catch((err) => console.error(err))
+    // putTransaction({
+    //   payeeUserName: this.state.payee,
+    //   description: 'This is a test',
+    //   amount: this.state.amount
+    // })
+    // .then((res) => console.log(res))
+    // .catch((err) => console.error(err))
   }
 
   render() {

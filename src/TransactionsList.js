@@ -129,7 +129,7 @@ class TransactionsList extends Component {
 
   _renderSectionHeader(sectionData, sectionID) {
     return (
-      <View style={merge(styles.section, styles.sectionBorder)}>
+      <View style={merge(styles.section, styles.sectionBorder)} ke={sectionID}>
         <DefaultText style={styles.sectionHeader}>
           {sectionID}
         </DefaultText>

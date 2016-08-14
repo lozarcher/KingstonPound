@@ -18,7 +18,7 @@ export default class Tabs extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'transactions',
+      selectedTab: 'business',
       modalVisible: false
     }
   }
