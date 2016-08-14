@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, TextInput, StyleSheet, TouchableHighlight } from 'react-native'
 import DefaultText from './DefaultText'
 import color from './colors'
 import merge from './merge'
+import { putTransaction } from './api'
 
 const style = {
   formGroup: {
@@ -49,29 +50,65 @@ const style = {
   }
 }
 
-const SendMoney = (props) =>
-  <View>
-    <View style={style.heading}>
-      <TouchableHighlight style={merge(style.cancelButton, style.button)} onPress={() => props.cancel()}>
-        <View>
-          <DefaultText style={style.buttonText}>Cancel</DefaultText>
+const NavBarButton = ({style, children, onPress}) =>
+  <TouchableHighlight style={style} onPress={onPress}>
+    <View>
+      {children}
+    </View>
+  </TouchableHighlight>
+
+class SendMoney extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      payee: '',
+      amount: '0'
+    }
+  }
+
+  _send() {
+    putTransaction({
+      payeeUserName: this.state.payee,
+      description: 'This is a test',
+      amount: this.state.amount
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.error(err))
+  }
+
+  render() {
+    return (
+      <View>
+        <View style={style.heading}>
+          <NavBarButton style={merge(style.cancelButton, style.button)} onPress={() => this.props.cancel()}>
+            <DefaultText style={style.buttonText}>Cancel</DefaultText>
+          </NavBarButton>
+          <DefaultText style={style.headingText}>Send Money</DefaultText>
+          <NavBarButton style={merge(style.sendButton, style.button)} onPress={this._send.bind(this)}>
+            <DefaultText style={style.buttonText}>Send</DefaultText>
+          </NavBarButton>
         </View>
-      </TouchableHighlight>
-      <DefaultText style={style.headingText}>Send Money</DefaultText>
-      <TouchableHighlight style={merge(style.sendButton, style.button)} onPress={() => console.log('hi')}>
-        <View>
-          <DefaultText style={style.buttonText}>Send</DefaultText>
+        <View style={style.formGroup}>
+          <DefaultText style={style.label}>To:</DefaultText>
+          <TextInput
+            style={style.textInput}
+            value={this.state.payee}
+            onChangeText={(payee) => this.setState({payee})}
+            placeholder='payee'/>
         </View>
-      </TouchableHighlight>
-    </View>
-    <View style={style.formGroup}>
-      <DefaultText style={style.label}>To:</DefaultText>
-      <TextInput style={style.textInput} placeholder='payee'></TextInput>
-    </View>
-    <View style={style.formGroup}>
-      <DefaultText style={style.label}>£</DefaultText>
-      <TextInput style={style.textInput} placeholder='amount' keyboardType='numeric'></TextInput>
-    </View>
-  </View>
+        <View style={style.formGroup}>
+          <DefaultText style={style.label}>£</DefaultText>
+          <TextInput
+            style={style.textInput}
+            value={this.state.amount}
+            onChangeText={(amount) => this.setState({amount})}
+            placeholder='amount'/>
+        </View>
+      </View>
+    )
+  }
+}
 
 export default SendMoney

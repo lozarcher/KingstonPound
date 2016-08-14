@@ -1,4 +1,5 @@
 import {encode} from 'base-64'
+import merge from './merge'
 
 const BASE_URL = 'http://claymaa6.miniserver.com:8080/bristol-pound/'
 const USER = 'test1'
@@ -6,23 +7,32 @@ const PASS = 'testing123'
 
 const headers = new Headers()
 headers.append('Authorization', 'Basic ' + encode(USER + ':' + PASS))
+headers.append('Content-Type', 'application/json')
 
 const querystring = params =>
   Object.keys(params).map(key => key + '=' + params[key]).join('&')
 
-const apiRequest = (url, params) =>
-  fetch(BASE_URL + url + (params ? '?' + querystring : ''), {headers})
+const get = (url, params) =>
+  fetch(BASE_URL + url + (params ? '?' + querystring(params) : ''), {headers})
+    .then(response => response.text())
+    .then(JSON.parse)
+
+const post = (url, params) =>
+  fetch(BASE_URL + url, merge({headers}, {method: 'POST', body: JSON.stringify(params)}))
     .then(response => response.text())
     .then(JSON.parse)
 
 export const getBusinesses = () =>
-  apiRequest('business')
+  get('business')
 
 export const getAccount = () =>
-  apiRequest('account')
+  get('account')
 
 export const getTransactions = (pageNumber = 1) =>
-  apiRequest('transaction', {
+  get('transaction', {
     pageNumber,
     pageSize: 20
   })
+
+export const putTransaction = (transaction) =>
+  post('transaction', transaction)

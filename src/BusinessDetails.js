@@ -29,7 +29,8 @@ const BusinessDetails = props =>
       parallaxHeaderHeight={PRALLAX_HEIGHT}
       renderBackground={() => (
         <View style={{height: PRALLAX_HEIGHT}}>
-          <MapView
+          { props.business.location
+            ? <MapView
                 style={styles.fullSize}
                 showsUserLocation={true}
                 region={{
@@ -43,6 +44,8 @@ const BusinessDetails = props =>
                   latitude: props.business.location.latitude
                 }]}>
               </MapView>
+            : <View></View>
+          }
         </View>
       )}>
       <View style={{ height: 500 }}>
