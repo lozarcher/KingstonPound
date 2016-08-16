@@ -34,4 +34,4 @@ const BalanceHeader = ({loadingBalance, balance}) =>
     </View>
   </View>
 
-  export default BalanceHeader
+export default BalanceHeader

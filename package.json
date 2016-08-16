@@ -10,8 +10,10 @@
     "dateformat": "^1.0.12",
     "react": "15.2.1",
     "react-native": "^0.31.0",
-    "react-native-gifted-listview": "git+https://github.com/FaridSafi/react-native-gifted-listview.git",
-    "react-native-parallax-scroll-view": "^0.19.0"
+    "react-native-parallax-scroll-view": "^0.19.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",

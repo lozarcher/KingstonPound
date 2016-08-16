@@ -4,6 +4,8 @@ import Business from './Business'
 import TransactionsList from './TransactionsList'
 import SendMoney from './SendMoney'
 import color from './colors'
+import { connect } from 'react-redux'
+import { navigateToTab, showSendMoney } from './store/reducer/navigation'
 
 // https://icons8.com/web-app/for/ios7/money
 // https://www.base64-image.de
@@ -13,61 +15,56 @@ const sendMoneyIcon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAY
 
 const statusBarHeight = 20
 
-export default class Tabs extends Component {
+const Tabs = (props) =>
+  <View style={{backgroundColor: color.bristolBlue, flex: 1}}>
+    <StatusBar barStyle='light-content'/>
+    <TabBarIOS
+      tintColor={color.bristolBlue}
+      style={{marginTop: statusBarHeight, flex: 1, backgroundColor: 'white'}}
+      barTintColor='#eee'>
+      <TabBarIOS.Item
+          title='Directory'
+          icon={{uri: shopsIcon, scale: 4}}
+          selected={props.selectedTab === 'business'}
+          onPress={() => props.navigateToTab('business')}>
+        <Business businesses={props.businesses}/>
+      </TabBarIOS.Item>
+      <TabBarIOS.Item
+          title='Transactions'
+          icon={{uri: transactionsIcon, scale: 4}}
+          selected={props.selectedTab === 'transactions'}
+          onPress={() => props.navigateToTab('transactions')}>
+        <View style={{marginBottom: 30, flex: 1}}>
+          <TransactionsList/>
+        </View>
+      </TabBarIOS.Item>
+      <TabBarIOS.Item
+          title='Send Money'
+          icon={{uri: sendMoneyIcon, scale: 4}}
+          selected={false}
+          onPress={() => props.showSendMoney(true)}>
+        <View style={{marginBottom: 30, flex: 1}}>
+          <SendMoney/>
+        </View>
+      </TabBarIOS.Item>
+    </TabBarIOS>
+    <Modal
+      animationType={"slide"}
+      transparent={false}
+      visible={props.sendMoneyVisible}>
+      <SendMoney cancel={() => props.showSendMoney(false)}/>
+    </Modal>
+  </View>
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedTab: 'business',
-      modalVisible: false
-    }
+const mapDispatchToProps = (dispatch) => ({
+  navigateToTab: (tabName) => {
+    dispatch(navigateToTab(tabName))
+  },
+  showSendMoney: (visible) => {
+    dispatch(showSendMoney(visible))
   }
+})
 
-  render() {
-    const selectTab = (selectedTab) => () => this.setState({
-      selectedTab
-    })
+const mapStateToProps = (state) => ({...state.navigation})
 
-    return (
-      <View style={{backgroundColor: color.bristolBlue, flex: 1}}>
-        <StatusBar barStyle='light-content'/>
-        <TabBarIOS
-          tintColor={color.bristolBlue}
-          style={{marginTop: statusBarHeight, flex: 1, backgroundColor: 'white'}}
-          barTintColor='#eee'>
-          <TabBarIOS.Item
-              title='Directory'
-              icon={{uri: shopsIcon, scale: 4}}
-              selected={this.state.selectedTab === 'business'}
-              onPress={selectTab('business')}>
-            <Business businesses={this.props.businesses}/>
-          </TabBarIOS.Item>
-          <TabBarIOS.Item
-              title='Transactions'
-              icon={{uri: transactionsIcon, scale: 4}}
-              selected={this.state.selectedTab === 'transactions'}
-              onPress={selectTab('transactions')}>
-            <View style={{marginBottom: 30, flex: 1}}>
-              <TransactionsList/>
-            </View>
-          </TabBarIOS.Item>
-          <TabBarIOS.Item
-              title='Send Money'
-              icon={{uri: sendMoneyIcon, scale: 4}}
-              selected={false}
-              onPress={() => this.setState({modalVisible: true})}>
-            <View style={{marginBottom: 30, flex: 1}}>
-              <SendMoney/>
-            </View>
-          </TabBarIOS.Item>
-        </TabBarIOS>
-        <Modal
-          animationType={"slide"}
-          transparent={false}
-          visible={this.state.modalVisible}>
-          <SendMoney cancel={() => this.setState({modalVisible: false})}/>
-        </Modal>
-      </View>
-    )
-  }
-}
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs)

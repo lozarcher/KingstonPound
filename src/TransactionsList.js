@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, ListView, View, Image, ActivityIndicator, TouchableHighlight } from 'react-native'
-import dateFormat from 'dateformat'
 import DefaultText from './DefaultText'
 import Price from './Price'
-import {getTransactions, getAccount} from './api'
+import { connect } from 'react-redux'
 import merge from './merge'
 import BalanceHeader from './BalanceHeader'
+import { loadMoreTransactions } from './store/reducer/transaction'
 
 const borderColor = '#ddd'
 const marginSize = 8
@@ -49,128 +49,61 @@ const styles = {
   }
 }
 
-const groupTransactions = (transactions) => {
-  transactions = transactions.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime))
-  let grouped = {}
-  let sectionIdentities = []
-  transactions.forEach((transaction) => {
-    const category = dateFormat(new Date(transaction.dateTime), 'mmmm dS, yyyy')
-    if (sectionIdentities.indexOf(category) === -1) {
-      grouped[category] = []
-      sectionIdentities.push(category)
-    }
-    grouped[category].push(transaction)
-  })
-  return {grouped, sectionIdentities}
-}
+const renderSeparator = () =>
+  <View style={styles.separator}/>
 
-class TransactionsList extends Component {
+const renderSectionHeader = (sectionData, sectionID) =>
+  <View style={merge(styles.section, styles.sectionBorder)} ke={sectionID}>
+   <DefaultText style={styles.sectionHeader}>
+     {sectionID}
+   </DefaultText>
+  </View>
 
-  constructor(props) {
-    super(props)
+const renderRow = (transaction) =>
+  <View style={styles.rowContainer} key={transaction.transactionNumber}>
+    { transaction.accountOwner.image ? <Image style={styles.image} source={{uri: transaction.accountOwner.image.url}}/> : <View style={styles.image} /> }
+    <DefaultText style={{marginLeft: 10}}>{transaction.accountOwner.name}</DefaultText>
+    <Price price={transaction.amount}/>
+  </View>
 
-    this.state = {
-      loadingTransactions: true,
-      loadingMoreTransactions: false,
-      loadingBalance: true,
-      transaction: {},
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (a, b) => a.transactionNumber === b.transactionNumber,
-        sectionHeaderHasChanged: (a, b) => a == b
-      })
-    }
+const renderLoadingFooter = () =>
+  <View style={merge(styles.section, styles.sectionBorder, {justifyContent: 'center'})}>
+    <ActivityIndicator/>
+  </View>
 
-    getAccount()
-      .then(account => this.setState({
-        balance: account.balance,
-        loadingBalance: false
-      }))
+const renderFooter = (onPress) =>
+  <TouchableHighlight onPress={onPress}>
+    <View style={merge(styles.section, styles.sectionBorder)}>
+      <DefaultText style={merge(styles.sectionHeader, {color: '#1480ba'})}>Load more ...</DefaultText>
+    </View>
+  </TouchableHighlight>
 
-    getTransactions()
-      .then(transactions => {
-          const grouped = groupTransactions(transactions)
-          this.setState({
-            loadingTransactions: false,
-            page: 1,
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(grouped.grouped, grouped.sectionIdentities),
-            transactions
-          })
-      })
+
+const TransactionsList = (props) =>
+  <View style={{flex:1}}>
+    <BalanceHeader balance={props.balance} loadingBalance={props.loadingBalance}/>
+    {props.loadingTransactions
+      ? <ActivityIndicator size='large' style={{flex: 1}}/>
+      : <ListView
+          style={{flex: 1, marginBottom: 20}}
+          pageSize={10}
+          dataSource={props.dataSource}
+          renderSeparator={renderSeparator}
+          renderSectionHeader={renderSectionHeader}
+          renderFooter={() =>
+              props.loadingMoreTransactions
+              ? renderLoadingFooter()
+              : renderFooter(() => props.loadMore(props.page + 1))}
+          renderRow={renderRow}/>}
+  </View>
+
+
+const mapDispatchToProps = (dispatch) => ({
+  loadMore: (page) => {
+    dispatch(loadMoreTransactions(page))
   }
+})
 
-  _renderRow(transaction) {
-    return (
-      <View style={styles.rowContainer} key={transaction.transactionNumber}>
-        { transaction.accountOwner.image ? <Image style={styles.image} source={{uri: transaction.accountOwner.image.url}}/> : <View style={styles.image} /> }
-        <DefaultText style={{marginLeft: 10}}>{transaction.accountOwner.name}</DefaultText>
-        <Price price={transaction.amount}/>
-      </View>
-    )
-  }
+const mapStateToProps = (state) => ({...state.transaction})
 
-  _loadMore() {
-    const nextPage = this.state.page + 1
-    this.setState({
-      loadingMoreTransactions: true
-    })
-    getTransactions(nextPage)
-      .then(transactions => {
-        const mergedTransactions = [...this.state.transactions, ...transactions]
-        const grouped = groupTransactions(mergedTransactions)
-        this.setState({
-          loading: false,
-          page: nextPage,
-          dataSource: this.state.dataSource.cloneWithRowsAndSections(grouped.grouped, grouped.sectionIdentities),
-          transactions: mergedTransactions,
-          loadingMoreTransactions: false
-        })
-      })
-  }
-
-  _renderSectionHeader(sectionData, sectionID) {
-    return (
-      <View style={merge(styles.section, styles.sectionBorder)} ke={sectionID}>
-        <DefaultText style={styles.sectionHeader}>
-          {sectionID}
-        </DefaultText>
-      </View>
-    )
-  }
-
-  _renderSeparator() {
-    return <View style={styles.separator}/>
-  }
-
-  _renderFooter() {
-    const enabled = !this.state.loadingMoreTransactions
-    return enabled
-      ? <TouchableHighlight onPress={() => this._loadMore()}>
-          <View style={merge(styles.section, styles.sectionBorder)}>
-            <DefaultText style={merge(styles.sectionHeader, {color: '#1480ba'})}>Load more ...</DefaultText>
-          </View>
-        </TouchableHighlight>
-      : <View style={merge(styles.section, styles.sectionBorder, {justifyContent: 'center'})}>
-          <ActivityIndicator/>
-        </View>
-  }
-
-  render() {
-    return (
-      <View style={{flex:1}}>
-        <BalanceHeader balance={this.state.balance} loadingBalance={this.state.loadingBalance}/>
-        {this.state.loadingTransactions
-          ? <ActivityIndicator size='large' style={{flex: 1}}/>
-          : <ListView
-              style={{flex: 1, marginBottom: 20}}
-              pageSize={10}
-              dataSource={this.state.dataSource}
-              renderSeparator={this._renderSeparator}
-              renderSectionHeader={this._renderSectionHeader}
-              renderFooter={this._renderFooter.bind(this)}
-              renderRow={this._renderRow.bind(this)}/>}
-      </View>
-    )
-  }
-}
-
-export default TransactionsList
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList)
