@@ -1,5 +1,5 @@
 import { ListView } from 'react-native'
-import merge from '../../merge'
+import merge from '../../util/merge'
 
 const initialState = {
   business: [],

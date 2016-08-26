@@ -1,7 +1,7 @@
 import React from 'react'
 import { ActivityIndicator, ListView, View } from 'react-native'
-import BusinessListItem from './BusinessListItem'
 import { connect } from 'react-redux'
+import BusinessListItem from './BusinessListItem'
 
 const renderRow = (navigator) =>
   (business) =>

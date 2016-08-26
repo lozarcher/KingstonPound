@@ -1,8 +1,8 @@
 import React from 'react'
 import { Navigator } from 'react-native'
+import { connect } from 'react-redux'
 import BusinessList from './BusinessList'
 import BusinessDetails from './BusinessDetails'
-import { connect } from 'react-redux'
 
 const Business = (props) =>
   <Navigator
