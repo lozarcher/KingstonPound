@@ -1,7 +1,7 @@
 import {encode} from 'base-64'
 import merge from './util/merge'
 
-const BASE_URL = 'http://claymaa6.miniserver.com:8080/bristol-pound/'
+const BASE_URL = 'https://bristol.cyclos.org/bristolpoundsandbox03/api/'
 const USER = 'test1'
 const PASS = 'testing123'
 
@@ -24,16 +24,53 @@ const post = (url, params) =>
     .then(JSON.parse)
 
 export const getBusinesses = () =>
-  get('business')
+  get('users', {
+    fields: [
+      'email',
+      'id',
+      'name',
+      'username',
+      'address.addressLine1',
+      'address.addressLine2',
+      'address.zip',
+      'address.location',
+      'image.url',
+      'phone',
+      'display',
+      'shortDisplay'
+    ]
+  })
 
 export const getAccount = () =>
-  get('account')
+  get('self/accounts', {
+    fields: ['status.balance']
+  }).then((res) => res[0].status.balance) // get first item in list for now
 
-export const getTransactions = (pageNumber = 1) =>
-  get('transaction', {
-    pageNumber,
+
+export const getTransactions = (page = 0) =>
+  get('self/accounts/member/history', {
+    fields: [
+      'id',
+      'transactionNumber',
+      'date',
+      'description',
+      'amount',
+      'type',
+      'relatedAccount'
+    ],
+    page,
     pageSize: 20
   })
 
-export const putTransaction = (transaction) =>
-  post('transaction', transaction)
+export const putTransaction = (payment) =>
+  get('self/payments/data-for-perform', {
+      to: payment.subject,
+      fields: 'paymentTypes.id'
+  })
+  .then((res) => {
+    var transaction = {
+      ...payment,
+      type: res.paymentTypes[0].id
+    }
+    return post('self/payments', transaction)
+  })
