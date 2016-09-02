@@ -1,4 +1,4 @@
-# React Name
+# Bristol Pound
 Hello and welcome to BristolPound. This project is an internal React-Native application to be used by [Bristol Pound](http://bristolpound.org/) to replace their existing application.
 
 ## Getting Started
