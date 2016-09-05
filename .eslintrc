@@ -10,6 +10,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
     "semi": [2, "never"],
     "quotes": [2, "single"],
     "strict": [2, "never"],
