@@ -18,7 +18,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-inline-environment-variables": "^6.8.0",
+    "babel-remove-process-env-assignment": "0.0.2",
     "eslint": "^3.2.2",
-    "eslint-plugin-react": "^6.0.0"
+    "eslint-plugin-react": "^6.0.0",
+    "remote-redux-devtools": "^0.4.7"
   }
 }
