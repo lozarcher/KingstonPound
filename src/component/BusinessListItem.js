@@ -1,5 +1,8 @@
 import React from 'react'
 import { View, TouchableHighlight, Image } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as actions from '../store/reducer/navigation'
 import DefaultText from './DefaultText'
 
 const styles = {
@@ -7,7 +10,8 @@ const styles = {
     flexDirection: 'row',
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd'
+    borderBottomColor: '#ddd',
+    backgroundColor: 'white'
   },
   image: {
     backgroundColor: '#ddd',
@@ -32,7 +36,7 @@ const styles = {
 }
 
 const BusinessListItem = props =>
-  <TouchableHighlight onPress={() => props.businessClicked(props.business)}
+  <TouchableHighlight onPress={() => props.showBusinessDetails(props.business)}
             underlayColor='#dddddd' key={props.business.id}>
     <View style={styles.container}>
       { props.business.image ? <Image style={styles.image} source={{uri: props.business.image.url}}/> : <View style={styles.image}/> }
@@ -47,4 +51,7 @@ const BusinessListItem = props =>
     </View>
   </TouchableHighlight>
 
-export default BusinessListItem
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(actions, dispatch)
+
+export default connect(() => ({}), mapDispatchToProps)(BusinessListItem)

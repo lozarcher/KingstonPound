@@ -1,11 +1,13 @@
 import React from 'react'
-import { StyleSheet, ListView, View, Image, ActivityIndicator, TouchableHighlight } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { StyleSheet, ListView, View, Image, ActivityIndicator, TouchableHighlight, RefreshControl } from 'react-native'
+
 import DefaultText from './DefaultText'
 import Price from './Price'
-import { connect } from 'react-redux'
 import merge from '../util/merge'
 import BalanceHeader from './BalanceHeader'
-import { loadMoreTransactions } from '../store/reducer/transaction'
+import * as actions from '../store/reducer/transaction'
 
 const borderColor = '#ddd'
 const marginSize = 8
@@ -82,6 +84,16 @@ const renderFooter = (onPress) =>
     </View>
   </TouchableHighlight>
 
+const loadTransactions = (dispatchedFunction, useFirstDate, transactions) => {
+  if (transactions.length > 0) {
+    const transactionDate = transactions[useFirstDate ? 0 : transactions.length - 1].date
+    //TODO: optimise as we know the list is sorted and the date is at the end of the list
+    const excludeIdList = transactions
+                            .filter((tr) => tr.date === transactionDate)
+                            .map((tr) => tr.id)
+    dispatchedFunction(transactionDate, excludeIdList)
+  }
+}
 
 const TransactionsList = (props) =>
   <View style={{flex:1}}>
@@ -95,18 +107,21 @@ const TransactionsList = (props) =>
           renderSeparator={renderSeparator}
           renderSectionHeader={renderSectionHeader}
           renderFooter={() =>
-              props.loadingMoreTransactions
-              ? renderLoadingFooter()
-              : renderFooter(() => props.loadMore(props.page + 1))}
-          renderRow={renderRow}/>}
+              props.noMoreTransactionsToLoad
+              ? undefined
+              : ( props.loadingMoreTransactions
+                ? renderLoadingFooter()
+                : renderFooter(() => loadTransactions(props.loadTransactionsBefore, false, props.transactions)))}
+          renderRow={renderRow}
+          refreshControl={<RefreshControl
+            refreshing={props.refreshing}
+            onRefresh={() => loadTransactions(props.loadTransactionsAfter, true, props.transactions)} />
+          }/>}
   </View>
 
 
-const mapDispatchToProps = (dispatch) => ({
-  loadMore: (page) => {
-    dispatch(loadMoreTransactions(page))
-  }
-})
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(actions, dispatch)
 
 const mapStateToProps = (state) => ({...state.transaction})
 
