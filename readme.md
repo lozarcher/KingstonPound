@@ -7,6 +7,7 @@ You should fork this project, clone the fork and work on your own fork. When you
 To run the application:
 * `npm install`
 * `react-native run-android` / `react-native run-ios`
+* On iOS you need to open node_modules/react-native-maps/ios/AirMaps/AIRMap.h and AIRMapCallout.h and change `#import 'React/RCTComponent'` to `#import 'RCTComponent'`
 
 For production:
 * `PROD=true react-native run-android` / `PROD=true react-native run-ios`
