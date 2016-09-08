@@ -5,7 +5,8 @@ const initialState = {
   payee: '',
   amount: undefined,
   loading: false,
-  transactionResponse: undefined
+  newTransaction: undefined,
+  paymentFailed: false
 }
 
 export const resetForm = () => ({
@@ -26,11 +27,12 @@ export const sendTransaction = () =>
   (dispatch, getState) => {
     dispatch(setLoading())
     putTransaction({
-        payeeUserName: getState().sendMoney.payee,
+        subject: getState().sendMoney.payee,
         description: 'Test description',
         amount: getState().sendMoney.amount
       })
-      .then(response => dispatch(transactionComplete(response)))
+      .then(response =>
+        dispatch(response.transactionNumber ? transactionComplete(response) : paymentFailed()))
       .catch(console.error)
   }
 
@@ -38,9 +40,13 @@ const setLoading = () => ({
   type: 'sendMoney/SET_LOADING'
 })
 
-const transactionComplete = (transactionResponse) => ({
+const transactionComplete = (newTransaction) => ({
   type: 'sendMoney/TRANSACTION_COMPLETE',
-  transactionResponse
+  newTransaction
+})
+
+const paymentFailed = () => ({
+  type: 'sendMoney/PAYMENT_FAILED',
 })
 
 const reducer = (state = initialState, action) => {
@@ -65,7 +71,14 @@ const reducer = (state = initialState, action) => {
       break
     case 'sendMoney/TRANSACTION_COMPLETE':
       state = merge(initialState, {
-        transactionResponse: action.transactionResponse
+        newTransaction: action.newTransaction,
+        paymentFailed: false
+      })
+      break
+    case 'sendMoney/PAYMENT_FAILED':
+      state = merge(initialState, {
+        newTransaction: undefined,
+        paymentFailed: true
       })
       break
   }

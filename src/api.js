@@ -5,6 +5,7 @@ import NetworkError from './networkError'
 
 const BASE_URL = 'https://bristol.cyclos.org/bristolpoundsandbox03/api/'
 let sessionToken = ''
+export const PAGE_SIZE = 20
 
 const httpHeaders = () => {
   const headers = new Headers()
@@ -12,6 +13,7 @@ const httpHeaders = () => {
     headers.append('Session-Token', sessionToken)
   }
   headers.append('Accept', 'application/json')
+  headers.append('Content-Type', 'application/json')
   return headers
 }
 
@@ -27,14 +29,13 @@ const querystring = params =>
 
 const get = (url, params) =>
   fetch(BASE_URL + url + (params ? '?' + querystring(params) : ''), {headers: httpHeaders()})
-    .then(response => response.text())
-    .then(JSON.parse)
+    .then(response => response.json())
     .catch(console.error)
 
 const post = (url, params) =>
   fetch(BASE_URL + url, merge({headers: httpHeaders()}, {method: 'POST', body: JSON.stringify(params)}))
-    .then(response => response.text())
-    .then(JSON.parse)
+    .then(response => response.json())
+    .catch(console.error)
 
 export const getBusinesses = () =>
   get('users', {
@@ -51,7 +52,9 @@ export const getBusinesses = () =>
       'phone',
       'display',
       'shortDisplay'
-    ]
+    ],
+    pageSize: 1000000,
+    addressResult: 'primary'
   })
 
 export const getAccount = () =>
@@ -59,9 +62,8 @@ export const getAccount = () =>
     fields: ['status.balance']
   }).then((res) => res[0].status.balance) // get first item in list for now
 
-
-export const getTransactions = (page = 0) =>
-  get('self/accounts/member/history', {
+export const getTransactions = (additionalParams) =>
+  get('self/accounts/member/history', merge({
     fields: [
       'id',
       'transactionNumber',
@@ -71,9 +73,9 @@ export const getTransactions = (page = 0) =>
       'type',
       'relatedAccount'
     ],
-    page,
-    pageSize: 20
-  })
+    page: 0,
+    pageSize: PAGE_SIZE
+  }, additionalParams ? additionalParams : {}))
 
 export const putTransaction = (payment) =>
   get('self/payments/data-for-perform', {
