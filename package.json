@@ -7,7 +7,6 @@
     "test": "eslint src/**/*.js"
   },
   "dependencies": {
-    "babel-preset-react-native": "^1.9.0",
     "base-64": "^0.1.0",
     "dateformat": "^1.0.12",
     "haversine": "^1.0.0",
@@ -23,9 +22,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "babel-plugin-transform-inline-environment-variables": "^6.8.0",
     "babel-preset-react-native": "^1.9.0",
-    "babel-remove-process-env-assignment": "0.0.2",
     "eslint": "^3.2.2",
     "eslint-plugin-react": "^6.0.0",
     "remote-redux-devtools": "^0.4.7"
