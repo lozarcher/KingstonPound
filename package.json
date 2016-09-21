@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "eslint src/**/*.js"
+    "test": "eslint src/**/*.js",
+    "remove-release-candidates": "npm uninstall react && npm uninstall react-native && npm uninstall react-native-maps",
+    "install-old-versions": "npm install react@15.2.1 && npm install react-native@0.31.0 && npm install react-native-maps@0.7.1",
+    "downgrade": "npm run remove-release-candidates && npm run install-old-versions"
   },
   "dependencies": {
     "base-64": "^0.1.0",
