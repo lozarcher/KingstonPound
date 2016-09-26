@@ -21,3 +21,14 @@ Before committing code please run `npm test` which will verify the code against 
 Style Choices:
 * Stateless functional components where possible
 * [Ducks](https://github.com/erikras/ducks-modular-redux) redux file structure
+
+## OS Versions supported
+
+This project supports iOS and Android with the following constraints:
+
+* Android >=4.1, giving a reach of ~95%
+* Support for Normal, Large, XLarge Android screen sizes
+* Designs targetting iPhone 5 and iPhone 6 screen sizes, with the UI 'flexing' to accomodate other dimensions
+* Support for iOS >=8, giving a reach of ~98%
+
+See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further details and commentary.
