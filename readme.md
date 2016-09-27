@@ -32,3 +32,19 @@ This project supports iOS and Android with the following constraints:
 * Support for iOS >=8, giving a reach of ~98%
 
 See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further details and commentary.
+
+## Custom Fonts
+
+### Museo Sans
+
+The choices are MuseoSans-300, MuseoSans-700 and MuseoSans-500Italic
+
+### Museo Slab
+
+The only choice here is MuseoSlab-700
+
+### Adding more Fonts
+
+1. Add .otf file to ios/BristolPoundReactNative/fonts (actually it can go anywhere but this keeps it organised)
+2. Follow these instructions: https://medium.com/@dabit3/adding-custom-fonts-to-react-native-b266b41bff7f#.as4yo4odg
+3. Now find the corresponding .ttf file, copy to android/app/src/main/assets/fonts and rename it to match the font name
