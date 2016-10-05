@@ -2,42 +2,30 @@
 |:------------:|:--------:|
 |    BRP0001   |     3    |
 
-| Created (date)  |  Name  |    Reason   |
-|:---------------:|:------:|:-----------:|
-|   15/09/2016    | Carlos | First draft |
-| Modified (date) |  Name  |    Reason   |
-|                 |        |             |
-|                 |        |             |
-
 # Idea:
+
 Usage of the Trader information screen:
 1. Display information about the trader
+2. If the user is logged in, display transactions done to that Trader as well
 
 ## Out of scope:
 
-- Test the behavior when the user has not logged in; the login process has not been defined yet (the current login screen is temporary).
-- The _Send Payment_ functionality is not implemented yet, but the button should be displayed.
-- No animations are displayed in the _Trader information_ page, and no collapse/expand functionality has been implemented yet.
-- Checking that the button is fixed to the bottom of the screen. In this test the user needs to scroll down in order to see the button.
+- _Send Money_ functionality (the button is displayed, and there is some basic functionality)
+- Animations in the _Trader information_ page
+- Collapse/expand functionality
+- Refresh functionality
+- Loading additional transactions that are not currently cached
 
 ## Setup and additional info:
 
-The user can open the _Trader information_ page from 2 locations in the app:
-  1. From the _Search_ page, by selecting a trader
-  2. From the _Transactions_ page, by selecting a transaction; this will show the information from the Trader used in that transaction
-The _Trader information_ page will list the information from the Trader, and allow the user to make a payment.
+The user can open the _Trader information_ page from the following locations in the app:
+  1. From the _Search_ page, by selecting a Trader
+  2. From the _Spending_ screen (_Transactions_ tab), by selecting a transaction; this will show the information from the Trader used in that transaction
+  3. From the _Spending_ screen (_Traders & Friends_ tab), by selecting a Trader
 
-For this test, the user must be logged in (the _Send Payment_ button will be displayed only if the user has logged in).
+The _Trader information_ page lists the information from the Trader, and has a fixed _Send Money_ button at the bottom of the screen
 
-Some sample test users are:
-* __pshek/testing123__
-* __test1/testing123__
-
-New users can be created, but they won't have any transactions. All users have the same privileges.
-
-The backend for this test is:
-
-[Bristol Pound Sandbox03](https://bristol.cyclos.org/bristolpoundsandbox03/api/#/)
+For login information, please refer to [logins.md](https://github.com/ScottLogic/BristolPound/blob/master/test_cases/helpers/logins.md)
 
 Possible fields for each Trader:
 + Deal
@@ -48,13 +36,13 @@ Possible fields for each Trader:
 + Location
 
 ## Steps / Expected results
+
 | # | Step | Expected result | Comments |
 |:-:|:----:|-----------------|----------|
-| 1 | Start the app | The _Search_ page appears | User is not logged in yet |
-| 2 | Open the _Transactions_ page | The _Login_ page appears if the user is not logged in | User/pass is prepopulated now (temp) |
-| 3 | Login (only the first time) | The _Transactions_ page displays transactions for that user | The _Prev/Next_ buttons allow viewing older transactions |
-| 4 | Select a transaction | The _Trader information_ screen appears | Each trader can display different information; the _Send Payment_ button appears at the bottom |
-| 5 | Go back to the _Transactions_ page | The _Transactions_ page displays transactions for that user | Clicking on the _X_ brings the user to the previous page |
-| 6 | Go to the _Search_ page, and select the previous Trader | The _Trader information_ screen shows the same information as in 4 | |
-| 7 | Go back to the _Search_ page | The _Search_ screen appears | |
-| 8 | Repeat steps 2 to 7 for different Traders/Transactions | Information updated for the new Trader | Optional. To do: identify one Trader with all the fields populated and one with the minimum number of fields populated to use as examples |
+| 1 | Start the app and go to the _Spending_ screen | The _Login_ page appears | User is not logged in by default yet |
+| 2 | Login to Prod | The _Transactions_ tab displays the transactions done this month, ordered by date (most recent ones first) | The carousel also shows the previous month |
+| 3 | Select a transaction | The _Trader information_ screen displays Trader information, and also the transactions done to that Trader  | Each trader can display different information; the _Send Money_ button is fixed to the bottom of the screen; currently only cached transactions appear, so the result may be different if the user loads more transactions by navigating to previous months |
+| 4 | Go back to the _Spending_ screen | The _Transactions_ tab displays transactions for that user | Clicking on the _X_ brings the user to the previous screen |
+| 5 | Go to the _Traders & Friends_ tab,a nd select the previous Trader | The Traders are listed ordered by the total amount spent on each | The result should be the same as in step 3 |
+| 6 | Go to the _Search_ page, and select the previous Trader | The _Trader information_ screen shows the same information as in 3 | |
+| 7 | Repeat steps 3-6 for different Traders/transactions | Each Trader shows the appropriate information | Locate Traders with different fields populated, either in Prod or in Dev |
