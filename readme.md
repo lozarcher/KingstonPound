@@ -4,14 +4,14 @@ Hello and welcome to BristolPound. This project is an internal React-Native appl
 For more information see the GitHub [wiki](https://github.com/ScottLogic/BristolPound/wiki).
 
 ___Note___
-_As of October 2016, there are some incompatibilities in the google-play-maps library that means that Android builds need to downgrade the react libraries to an earlier version._ 
+_As of October 2016, Android builds need to downgrade react and react-native to earlier versions._
 
 ### Technology Stack ###
 * __Javascript__ ECMA6
 * __npm__ - dependency management.
 * __react-native__ - libraries and run scripts
   * __React__
-  * __gradle__ 
+  * __gradle__
 * __eslint__ - static code analysis
 * (?) unit tests
 
@@ -23,7 +23,7 @@ Before running the application you will need to install install [node](https://n
 
 To run the application:
 * `npm install`
-* Windows/Android only: 
+* Windows/Android only:
   * `npm run downgrade`   (in case of difficulty try running the npm tasks separately).
 ```
    npm WARN react-native-maps@0.8.2 requires a peer of react@>=15.3.0 but none was installed.
@@ -36,7 +36,7 @@ To use remote-redux-devtools:
 * Open Chrome and navigate to [remotedev.io/local](remotedev.io/local). Uses [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools)
 
 ### Android Setup instructions:
-On Android to get the application running you will need a device connected or an emulator. You can check your devices using `adb devices`. Android Studio can be used to get an emulator up and running.
+On Android to get the application running you will need a device connected or an emulator. You can check your devices using `adb devices`. Android Studio can be used to get an emulator up and running. Alternatively, once you have an emulator set up you can run it with "emulator -avd <emulator name>" (for this, make sure that %ANDROID_HOME%/tools is in your PATH or Mac equivalent)
 
 ## Linting/Style Recommendations
 Before committing code please run `npm test` which will verify the code against the eslint configuration.
@@ -59,7 +59,7 @@ See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further det
 To support the design, some additional fonts have been added for referencing in css/react-native style objects.
 ### Available Fonts ###
 * Museo Sans Fonts:
-  * 'MuseoSans-300', 
+  * 'MuseoSans-300',
   * 'MuseoSans-700',
   * 'MuseoSans-500Italic'
 * Museo Slab families
@@ -99,8 +99,6 @@ These are all resolved using the __Android SDK Manager__.
 This is because `adb reverse` only runs on Android 5.0
 For Android 4.0, run from within the `BristolPound\Android` sub-directory:
 ```
- react-native start
  ./gradlew.bat installDebug
- emulator -avd MyEmulatorName
 ```  
-where `emulator` is an example using the Android Studio emulator, stored in the `%ANDROID_SDK_HOME%/tools` folder.
+Then go back to `BristolPound` and run `react-native start`
