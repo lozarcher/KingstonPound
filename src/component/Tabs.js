@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../store/reducer/navigation'
-import { resetForm } from '../store/reducer/login'
+import { closeLoginForm } from '../store/reducer/login'
 import TabBar from './tabbar/TabBar'
 import SearchTab from './searchTab/SearchTab'
 import NetworkConnection from './NetworkConnection'
@@ -18,6 +18,7 @@ import PersonScreen from './PersonScreen'
 import DeveloperOptions from './DeveloperOptions'
 import color from '../util/colors'
 import merge from '../util/merge'
+import LOGIN_STATUSES from '../stringConstants/loginStatus'
 
 const style = {
   tabs: {
@@ -80,25 +81,27 @@ const Tabs = (props) => {
   return (
     <View style={style.tabs}>
       {props.dialogOpen
-        ? <TouchableHighlight
+      ? <View style={style.flex}>
+          <TouchableHighlight
               style={merge(style.flex, style.backgroundView)}
-              onPress={() => props.resetForm()}
+              onPress={() => props.closeLoginForm()}
               underlayColor={color.transparent}>
             {content}
           </TouchableHighlight>
-        : content}
-      <Login />
+          <Login />
+        </View>
+      : content}
     </View> )
 }
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({...actions, resetForm}, dispatch)
+  bindActionCreators({ ...actions, closeLoginForm }, dispatch)
 
 const mapStateToProps = (state) => ({
   navigation: state.navigation,
-  loggedIn: state.login.loggedIn,
+  loggedIn: state.login.loginStatus === LOGIN_STATUSES.LOGGED_IN,
   status: state.status,
-  dialogOpen: state.login.open,
+  dialogOpen: state.login.loginFormOpen,
   online: state.networkConnection.status
 })
 
