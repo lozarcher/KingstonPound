@@ -13,7 +13,7 @@ _As of October 2016, Android builds need to downgrade react and react-native to 
   * __React__
   * __gradle__
 * __eslint__ - static code analysis
-* (?) unit tests
+* __(?)__ no unit test framework
 
 ## Getting Started
 You should fork this project, clone the fork and work on your own fork. When your change is ready to be reviewed create a pull request.
@@ -36,7 +36,14 @@ To use remote-redux-devtools:
 * Open Chrome and navigate to [remotedev.io/local](remotedev.io/local). Uses [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools)
 
 ### Android Setup instructions:
-On Android to get the application running you will need a device connected or an emulator. You can check your devices using `adb devices`. Android Studio can be used to get an emulator up and running. Alternatively, once you have an emulator set up you can run it with "emulator -avd <emulator name>" (for this, make sure that %ANDROID_HOME%/tools is in your PATH or Mac equivalent)
+On Android to get the application running you will need a device connected or an emulator. You can check your devices using `adb devices`. 
+
+Android Studio can be used to get an emulator up and running.
+Alternatively, once you have an emulator set up you can run it with 
+
+`emulator -avd MyEmulatorName`
+For this, make sure that `%ANDROID_HOME%/tools` folder is in your PATH or Mac equivalent.
+See the  [Android Studio documentation](https://developer.android.com/studio/run/emulator-commandline.html) for more options.
 
 ## Linting/Style Recommendations
 Before committing code please run `npm test` which will verify the code against the eslint configuration.
@@ -54,6 +61,17 @@ This project supports iOS and Android with the following constraints:
 * Support for iOS >=8, giving a reach of ~98%
 
 See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further details and commentary.
+
+## Debugging the Application
+### On an Android Device
+* For a device, shake the phone to open developer options. For the emulator __ctrl+m__ while there is no modal dialog open.
+* Select the __Start Remote JS Debugging__ option.
+* Chrome should open on http://localhost:8081/debugger-ui 
+* Open the chrome debugger and select the __Sources__ tab.
+* Drill down __debuggerWorker.js/localhost:8081__
+* At the bottom of the list of files (scroll past all the `C:\dev\BristolPound\node-modules\` entries) to select the appropriate `C:\dev\BristolPound\src\` file.
+* Mostly this will be a `reducer` file to capture the event handling.
+* Add breakpoints as normal.
 
 ## Custom Fonts
 To support the design, some additional fonts have been added for referencing in css/react-native style objects.
