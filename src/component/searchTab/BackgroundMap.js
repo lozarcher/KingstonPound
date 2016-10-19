@@ -2,16 +2,17 @@ import React from 'react'
 import MapView from 'react-native-maps'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import _ from 'lodash'
 import * as actions from '../../store/reducer/business'
+import colors from '../../util/colors'
+import PLATFORM from '../../stringConstants/platform'
 
 const MAP_PAN_DEBOUNCE_DURATION = 50
 
 class BackgroundMap extends React.Component {
   constructor() {
     super()
-
     this.skipNextLocationUpdate = false
   }
 
@@ -27,19 +28,31 @@ class BackgroundMap extends React.Component {
     const region = this.skipNextLocationUpdate ? undefined : this.props.mapViewport
     this.skipNextLocationUpdate = false
 
+    let markerArray = undefined
+    if (this.props.businessList) {
+      markerArray = this.props.businessList.filter(b => b.address)
+        .map(b => {
+          const markerProps = {
+            [Platform.OS === PLATFORM.IOS ? 'onSelect' : 'onPress']: () => {//https://github.com/airbnb/react-native-maps/issues/286
+              this.props.selectMarker(b.id)
+              this.updateViewport(b.address.location)
+            }
+          }
+          return <MapView.Marker
+            key={b.id}
+            coordinate={b.address.location}
+            {...markerProps}
+            pinColor={this.props.selectedMarker === b.id ? colors.bristolBlue : colors.gray}
+            />
+        })
+    }
+
     return (
       <MapView style={{...StyleSheet.absoluteFillObject}}
           region={region}
           showsUserLocation={true}
           onRegionChange={_.debounce(this.updateViewport.bind(this), MAP_PAN_DEBOUNCE_DURATION)}>
-        {this.props.businessList
-          ? this.props.businessList.filter(b => b.address)
-              .map(b =>
-                <MapView.Marker key={b.id}
-                    coordinate={b.address.location}
-                    onPress={() => this.updateViewport(b.address.location)}/>
-              )
-          : undefined}
+        {markerArray}
       </MapView>
     )
   }
