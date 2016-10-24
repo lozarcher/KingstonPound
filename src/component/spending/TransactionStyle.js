@@ -5,14 +5,6 @@ const museo700 = 'MuseoSans-700'
 const museo500 = 'MuseoSans-300'
 const museo300 = 'MuseoSans-300'
 
-const defaultMonthlyOptionText = {
-  fontFamily: museo500,
-  fontSize: 15,
-  textAlign: 'center',
-  justifyContent: 'center',
-  alignItems: 'center',
-}
-
 const styles = {
   image: {
     width: 42,
@@ -49,7 +41,8 @@ const styles = {
     height: 34,
     backgroundColor: color.offWhite,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 1
   },
   sectionHeader: {
     fontFamily: museo700,
@@ -63,43 +56,49 @@ const styles = {
     borderBottomColor: color.gray5,
     borderBottomWidth: 1
   },
-  flex: {
-    flex: 1,
-  },
   noflex: {
     flex: 0
   },
   center: {
     justifyContent: 'center'
   },
-}
-
-//TODO: add shadow to iOS
-export const headerStyles = {
-  carouselContainer: {
-    height: 106,
-    backgroundColor: color.white,
-    elevation: 5
+  noTransactions: {
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 50,
+      backgroundColor: color.offWhite
+    },
+    text: {
+      color: color.gray3
+    }
   },
-  monthlyOption: [
-    merge(defaultMonthlyOptionText, { color: color.gray }),
-    merge(defaultMonthlyOptionText, { color: color.gray2 }),
-    merge(defaultMonthlyOptionText, { color: color.gray3 })
-  ],
-  container: {
-    top: 38
+  headerStyle: {
+    carouselContainer: {
+      height: 106,
+      backgroundColor: color.white,
+      elevation: 5
+    },
+    monthlyOption: {
+      fontFamily: museo500,
+      fontSize: 15,
+      textAlign: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: color.gray
+    },
+    container: {
+      top: 38,
+      flex: 1
+    },
+    priceStyle: {
+      color: color.bristolBlue,
+      size: 32
+    }
   }
 }
 
-export const priceStyles = [{
-  color: color.bristolBlue,
-  size: 32
-}, {
-  color: color.bristolBlue2,
-  size: 32
-},{
-  color: color.bristolBlue3,
-  size: 32
-}]
 
 export default styles
