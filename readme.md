@@ -12,6 +12,7 @@ _As of October 2016, Android builds need to downgrade react and react-native to 
 * __react-native__ - libraries and run scripts
   * __React__
   * __gradle__
+  * __react-native-maps__ Maps provided by [airbnb](https://github.com/airbnb/react-native-maps)
 * __eslint__ - static code analysis
 * __(?)__ no unit test framework
 
