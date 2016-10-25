@@ -1,18 +1,18 @@
 import React from 'react'
-import { View, Platform } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import BackgroundMap from './BackgroundMap'
 import BusinessList from './BusinessList'
 import * as actions from '../../store/reducer/business'
 import styles from './SearchTabStyle'
-import PLATFORM from '../../stringConstants/platform'
+import PLATFORM from '../../util/Platforms'
 
 const DOCKED_LIST_VISIBLE_ROWS = 3
 
 // For Android devices, the scroll-to-expand behaviour is problematic. So instead
 // we fall back to a simpler interaction model.
-const EXPAND_VIA_SCROLL = Platform.OS === PLATFORM.IOS
+const EXPAND_VIA_SCROLL = PLATFORM.isIOS()
 
 const computeListHeight = (dataSource) =>
   // the compact list shows up to 3 rows
