@@ -1,13 +1,6 @@
-| Test case id | Priority |
-|:------------:|:--------:|
-|   BRPXXXX    |  [1-4]   |
-
-| Created (date)  |  Name  |    Reason   |
-|:---------------:|:------:|:-----------:|
-|                 |        |             |
-| Modified (date) |  Name  |    Reason   |
-|                 |        |             |
-|                 |        |             |
+| Test case id |
+|:------------:|
+|   BRPXXXX    |
 
 # Idea:
 
