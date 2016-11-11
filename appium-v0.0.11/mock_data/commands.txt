@@ -1,0 +1,10 @@
+# A Dev should probably take a look at this and confirm if the commands are correct
+
+# Get the list of traders from Dev	-> 500+ traders! it's a big output
+curl -X GET --header 'Accept: application/json' --header 'Authorization: Basic QWRtaW4xOnRlc3RpbmcxMjM=' 'https://bristol.cyclos.org/bristolpoundsandbox03/api/users?fields=id&fields=address.addressLine1&fields=address.addressLine2&fields=address.zip&fields=address.location&fields=image.url&fields=display&fields=shortDisplay&fields=username&fields=name&pageSize=1000000&addressResult=primary&orderBy=alphabeticallyAsc'
+
+# Get the details from user testmember in Dev (long name, username, email and phones)
+curl -X GET --header 'Accept: application/json' --header 'Authorization: Basic QWRtaW4xOnRlc3RpbmcxMjM=' 'https://bristol.cyclos.org/bristolpoundsandbox03/api/users/testmember?fields=display&fields=shortDisplay&fields=email&fields=phones'
+
+# Get transactions from testmember in Dev:
+curl -X GET --header 'Accept: application/json' --header 'Authorization: Basic dGVzdG1lbWJlcjp0ZXN0aW5nMTIz' 'https://bristol.cyclos.org/bristolpoundsandbox03/api/self/accounts/member/history?fields=id&fields=transactionNumber&fields=date&fields=description&fields=amount&fields=type&fields=relatedAccount&pageSize=100'
