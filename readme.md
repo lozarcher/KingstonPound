@@ -25,11 +25,15 @@ Before running the application you will need to install install [node](https://n
 To run the application:
 * `npm install`
 * Windows/Android only:
-  * `npm run downgrade`   (in case of difficulty try running the npm tasks separately).
-```
-   npm WARN react-native-maps@0.8.2 requires a peer of react@>=15.3.0 but none was installed.
-   npm WARN react-native-maps@0.8.2 requires a peer of react-native@>=0.32.0 but none was installed.
-```
+  * `npm run remove-release-candidates`   
+The next command will cause an error, however just ignore the error it as it is not important
+  * `npm install react@15.2.1`
+  ```
+     npm WARN react-native-maps@0.8.2 requires a peer of react@>=15.3.0 but none was installed.
+     npm WARN react-native-maps@0.8.2 requires a peer of react-native@>=0.32.0 but none was installed.
+  ```
+  * `npm install react-native@0.31.0`
+
 * `react-native run-android` / `react-native run-ios`
 * On iOS you need to open node_modules/react-native-maps/ios/AirMaps/AIRMap.h and AIRMapCallout.h and change `#import 'React/RCTComponent'` to `#import 'RCTComponent'`
 
@@ -37,11 +41,12 @@ To use remote-redux-devtools:
 * Open Chrome and navigate to [remotedev.io/local](remotedev.io/local). Uses [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools)
 
 ### Android Setup instructions:
-On Android to get the application running you will need a device connected or an emulator. You can check your devices using `adb devices`. 
+On Android to get the application running you will need a device connected or an emulator. You can check your devices using `adb devices`.
 
-Android Studio can be used to get an emulator up and running.
-Alternatively, once you have an emulator set up you can run it with 
+Android Studio can be used to get an emulator up and running. First Download android studio.
+Create the environment variable ANDROID_HOME with the value C:\Users\sking\AppData\Local\Android\sdk. Add %ANDROID_HOME%\tools and %ANDROID_HOME%\platform-tools and %ANDROID_HOME%\build-tools\25.0.1 (or whatever version is there) to PATH.
 
+Now open android studio and create an empty project. Then open the SDK manager by clicking the button with a blue arrow and an android face. You will need to download at least one android version. Then open the AVD manager by clicking the button with a picture of a phone with a purple screen and an android face. This button will be greyed out if you have not created a new project! Set up a new emulator, using the x86 image if it asks. Once this is done you can launch the emulator from within android studio or you can run it with
 `emulator -avd MyEmulatorName`
 For this, make sure that `%ANDROID_HOME%/tools` folder is in your PATH or Mac equivalent.
 See the  [Android Studio documentation](https://developer.android.com/studio/run/emulator-commandline.html) for more options.
@@ -59,7 +64,7 @@ This project supports iOS and Android with the following constraints:
  * Android >=4.4, giving a reach of ~85%
  * Support for Normal, Large, XLarge Android screen sizes
  * Designs targetting iPhone 5 and iPhone 6 screen sizes, with the UI 'flexing' to accomodate other dimensions
- * Support for iOS >=8, giving a reach of ~98%
+ * Support for iOS >=10
 
 See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further details and commentary.
 
@@ -67,7 +72,7 @@ See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further det
 ### On an Android Device
 * For a device, shake the phone to open developer options. For the emulator __ctrl+m__ while there is no modal dialog open.
 * Select the __Start Remote JS Debugging__ option.
-* Chrome should open on http://localhost:8081/debugger-ui 
+* Chrome should open on http://localhost:8081/debugger-ui
 * Open the chrome debugger and select the __Sources__ tab.
 * Drill down __debuggerWorker.js/localhost:8081__
 * At the bottom of the list of files (scroll past all the `C:\dev\BristolPound\node-modules\` entries) to select the appropriate `C:\dev\BristolPound\src\` file.
