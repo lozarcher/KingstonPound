@@ -3,64 +3,77 @@ Hello and welcome to BristolPound. This project is an internal React-Native appl
 
 For more information see the GitHub [wiki](https://github.com/ScottLogic/BristolPound/wiki).
 
-___Note___
-_As of October 2016, Android builds need to downgrade react and react-native to earlier versions._
-
 ### Technology Stack ###
 * __Javascript__ ECMA6
 * __npm__ - dependency management.
 * __react-native__ - libraries and run scripts
   * __React__
-  * __gradle__
   * __react-native-maps__ Maps provided by [airbnb](https://github.com/airbnb/react-native-maps)
 * __eslint__ - static code analysis
-* __(?)__ no unit test framework
 
 ## Getting Started
-You should fork this project, clone the fork and work on your own fork. When your change is ready to be reviewed create a pull request.
+You should fork this project and clone your fork. Ask Colin Eberhardt for access to the repository. When your change is ready to be reviewed push a branch to your fork and create a pull request.
 
 Before running the application you will need to install install [node](https://nodejs.org/en/download/) as well as the following global npm packages:
 * `npm install react-native-cli -g`
 
-To run the application:
+### Running on iPhone emulator:
+First, make sure XCode is installed.
 * `npm install`
-* `react-native run-android` / `react-native run-ios`
-* On iOS you may need to open node_modules/react-native-maps/ios/AirMaps/AIRMap.h and AIRMapCallout.h and change `#import 'React/RCTComponent'` to `#import 'RCTComponent'`
+* open XCode
+* In XCode, open ios/BristolPoundReactNative.xcodeproj
+* Select a device from the dropdown to the right of the play and stop buttons
+* Press play
 
-To use remote-redux-devtools:
-* Open Chrome and navigate to [remotedev.io/local](remotedev.io/local). Uses [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools)
+There is a very high chance it won't work. One possible reason is the version of XCode, we recommend at least 8.2. If this is not the issue, check the [wiki](https://github.com/ScottLogic/BristolPound/wiki)
+Failing that, google is your friend. Builds are very slow, be patient!
 
-### Android Setup instructions:
-On Android to get the application running you will need a device connected or an emulator. You can check your devices using `adb devices`.
+### Setting up an android emulator:
+Android Studio must be used to get an emulator up and running. First Download android studio.
+Create the environment variable ANDROID_HOME with the value C:\Users\<user>\AppData\Local\Android\sdk. Add %ANDROID_HOME%\tools and %ANDROID_HOME%\platform-tools and %ANDROID_HOME%\build-tools\25.0.1 (or whatever version is there) to PATH.
 
-Android Studio can be used to get an emulator up and running. First Download android studio.
-Create the environment variable ANDROID_HOME with the value C:\Users\sking\AppData\Local\Android\sdk. Add %ANDROID_HOME%\tools and %ANDROID_HOME%\platform-tools and %ANDROID_HOME%\build-tools\25.0.1 (or whatever version is there) to PATH.
-
-Now open android studio and create an empty project. Then open the SDK manager by clicking the button with a blue arrow and an android face. You will need to download at least one android version. Then open the AVD manager by clicking the button with a picture of a phone with a purple screen and an android face. This button will be greyed out if you have not created a new project! Set up a new emulator, using the x86 image if it asks. Once this is done you can launch the emulator from within android studio or you can run it with
+Now open android studio and create an empty project. Then open the SDK manager by clicking the button with a blue arrow and an android face. You will need to download at least one android version. Then open the AVD manager by clicking the button with a picture of a phone with a purple screen and an android face. This button will be greyed out if you have not created a new project in android studio! Set up a new emulator, using the x86 image if it asks. Once this is done you can launch the emulator from within android studio or you can run it from the command line with
 `emulator @MyEmulatorName`
-For this, make sure that `%ANDROID_HOME%/tools` folder is in your PATH or Mac equivalent.
+For this to work, make sure that `%ANDROID_HOME%/tools` folder is in your PATH.
 See the  [Android Studio documentation](https://developer.android.com/studio/run/emulator-commandline.html) for more options.
 
-## Linting/Style Recommendations
-Before committing code please run `npm test` which will verify the code against the eslint configuration.
-Style Choices:
-* Stateless functional components where possible
-* [Ducks](https://github.com/erikras/ducks-modular-redux) redux file structure
+### Connecting an android device
+Do not use a loved phone, react-native may destroy it!
+
+Debug mode (the method described here) only works with android 5 or above, but the finished app will run on android >= 4.4
+* Connect with USB cable
+* scroll down to `about phone` and tap about 7 times to enable dev options
+* open dev options. About half way down, there is an option for USB connection mode. Select PTP. This will have to be done every time the phone is connected (really annoying)
+* `adb devices` to check phone has been detected
+* `adb reverse tcp:8081 tcp:8081`
+
+Now your phone is ready to go!
+
+### Running on android (device or emulator)
+* `adb devices` - you need exactly one device in the list
+* `npm install`
+* `cd android && ./gradlew installDebug` (Bash) or `cd android && gradlew.bat installDebug` (cmd)
+
+If this fails, try a few more times before concluding something is wrong. Wait until the installation completes before starting the packager
+* `cd .. && react-native start` - starts the packager
+
+Now that the app is installed, open it. if it does not work shake the phone and select 'reload'. For emulators, press 'r' twice in quick succession to reload the app
 
 ## OS Versions supported
 
 This project supports iOS and Android with the following constraints:
 
- * Android >=4.4, giving a reach of ~85%
- * Support for Normal, Large, XLarge Android screen sizes
- * Designs targetting iPhone 5 and iPhone 6 screen sizes, with the UI 'flexing' to accomodate other dimensions
- * Support for iOS >=10
+ * Android >=4.4, giving a reach of ~85% of android devices
+ * Support for iOS >=10, this is necessary in order to exclude iPhone 4 which was considered too small
 
 See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further details and commentary.
 
-## Debugging the Application
-### On an Android Device
-* For a device, shake the phone to open developer options. For the emulator __ctrl+m__ while there is no modal dialog open.
+## Debugging
+The easiest way is to run `react-native log-android` or `react-native log-ios`. These commands simply print the logs in the console. For android errors, `adb logcat *:E` and `adb logcat *:F` are occasionally useful, but not in the general case. Check the [wiki](https://github.com/ScottLogic/BristolPound/wiki) for more tips
+
+### Chrome remote debug
+* For an android device, shake the phone to open developer options. For the emulator __ctrl+m__ while there is no modal dialog open.
+* For iPhone emulator, press windows-d to get developer options
 * Select the __Start Remote JS Debugging__ option.
 * Chrome should open on http://localhost:8081/debugger-ui
 * Open the chrome debugger and select the __Sources__ tab.
@@ -68,23 +81,6 @@ See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further det
 * At the bottom of the list of files (scroll past all the `C:\dev\BristolPound\node-modules\` entries) to select the appropriate `C:\dev\BristolPound\src\` file.
 * Mostly this will be a `reducer` file to capture the event handling.
 * Add breakpoints as normal.
-
-## Custom Fonts
-To support the design, some additional fonts have been added for referencing in css/react-native style objects.
-### Available Fonts ###
-* Museo Sans Fonts:
-  * 'MuseoSans-300',
-  * 'MuseoSans-700',
-  * 'MuseoSans-500Italic'
-* Museo Slab families
-  * 'MuseoSlab-700'
-
-### Adding a Custom Font
-For each font, we need both the ios and android file sets:
-1. Add __.otf__ file to `ios/BristolPoundReactNative/fonts` (actually it can go anywhere but this keeps it organised)
-2. Follow these [instructions](https://medium.com/@dabit3/adding-custom-fonts-to-react-native-b266b41bff7f#.as4yo4odg).
-You will need to follow __Step 5__ to get the font name for the android changes as well.
-3. Now find the corresponding __.ttf__ file, copy to `android/app/src/main/assets/fonts` and rename it to match the font name above.
 
 ## More Android Setup Errors
 #### SDK Package Errors ####
@@ -110,9 +106,3 @@ These are all resolved using the __Android SDK Manager__.
  error: closed
  Could not run adb reverse: Command failed: C:\dev\Android\sdk/platform-tools/adb reverse tcp:8081 tcp:8081
 ```
-This is because `adb reverse` only runs on Android 5.0
-For Android 4.0, run from within the `BristolPound\Android` sub-directory:
-```
- ./gradlew.bat installDebug
-```  
-Then go back to `BristolPound` and run `react-native start`
