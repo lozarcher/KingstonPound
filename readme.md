@@ -71,6 +71,10 @@ See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further det
 ## Debugging
 The easiest way is to run `react-native log-android` or `react-native log-ios`. These commands simply print the logs in the console. For android errors, `adb logcat *:E` and `adb logcat *:F` are occasionally useful, but not in the general case. Check the [wiki](https://github.com/ScottLogic/BristolPound/wiki) for more tips
 
+### Crash Reports ###
+* The app has integrated Crashlytics with Fabric for both Android and iOS, which register all app crashes 
+* In order to get access to the Fabric organisation and see the crash reports, email gginghina@scottlogic.com 
+
 ### Chrome remote debug
 * For an android device, shake the phone to open developer options. For the emulator __ctrl+m__ while there is no modal dialog open.
 * For iPhone emulator, press windows-d to get developer options
