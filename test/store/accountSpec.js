@@ -5,7 +5,7 @@ const initialState = {
   loadingBalance: true,
   loadingDetails: true,
   balance: undefined,
-  details: {},
+  details: {}
 }
 
 describe('Account reducer', () => {
@@ -26,7 +26,7 @@ describe('Account reducer', () => {
 		  	loadingBalance: false,
 		  	loadingDetails: true,
 		  	balance: 200,
-		  	details: {},
+		  	details: {}
 		})
 	})
 

@@ -5,13 +5,13 @@ const modalState = {
   none: 'none',
   traderScreen: 'traderScreen',
   personScreen: 'personScreen',
-  developerOptions: 'developerOptions',
+  developerOptions: 'developerOptions'
 }
 
 const mainComponent = {
   onboarding: 'onboarding',
   returningLogin: 'returningLogin',
-  tabs: 'tabs',
+  tabs: 'tabs'
 }
 
 const initialState = {
@@ -22,7 +22,7 @@ const initialState = {
   stateInitialised: false,
   modalVisible: false,
   modalOpen: false,
-  confirmationOpen: false,
+  confirmationOpen: false
 }
 
 describe('Navigation reducer', () => {
@@ -47,7 +47,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -65,7 +65,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: true,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -79,7 +79,7 @@ describe('Navigation reducer', () => {
 			  	stateInitialised: false,
 			  	modalVisible: true,
 			  	modalOpen: true,
-			  	confirmationOpen: false,
+			  	confirmationOpen: false
 			}, {
 	        	type: 'navigation/HIDE_MODAL'
 	      	})
@@ -91,7 +91,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -108,7 +108,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -125,7 +125,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -143,7 +143,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -160,7 +160,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: true,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -178,7 +178,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: true,
+		  	confirmationOpen: true
 		})
 	})
 
@@ -192,7 +192,7 @@ describe('Navigation reducer', () => {
 			  	stateInitialised: false,
 			  	modalVisible: false,
 			  	modalOpen: false,
-			  	confirmationOpen: false,
+			  	confirmationOpen: false
 			}, {
 	        	type: 'login/LOGIN_IN_PROGRESS'
 	      	})
@@ -204,7 +204,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -222,7 +222,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -240,7 +240,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -254,7 +254,7 @@ describe('Navigation reducer', () => {
 			  	stateInitialised: false,
 			  	modalVisible: false,
 			  	modalOpen: false,
-			  	confirmationOpen: true,
+			  	confirmationOpen: true
 			}, {
 	        	type: 'navigation/CLOSE_CONFIRMATION'
 	      	})
@@ -266,7 +266,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: false,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 
@@ -283,7 +283,7 @@ describe('Navigation reducer', () => {
 		  	stateInitialised: false,
 		  	modalVisible: false,
 		  	modalOpen: true,
-		  	confirmationOpen: false,
+		  	confirmationOpen: false
 		})
 	})
 

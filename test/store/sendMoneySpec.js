@@ -10,14 +10,14 @@ const initialState = {
   message: '',
   timestamp: undefined,
   inputPage: 0,
-  transactionNumber: -1,
+  transactionNumber: -1
 }
 
 const Page = {
   Ready: 0,
   EnterAmount: 1,
   MakingPayment: 2,
-  PaymentComplete: 3,
+  PaymentComplete: 3
 }
 
 describe('SendMoney reducer', () => {
@@ -43,7 +43,7 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: 0,
-		  	transactionNumber: -1,
+		  	transactionNumber: -1
 		})
 	})
 
@@ -62,7 +62,7 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: 0,
-		  	transactionNumber: -1,
+		  	transactionNumber: -1
 		})
 	})
 
@@ -80,7 +80,7 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: 0,
-		  	transactionNumber: -1,
+		  	transactionNumber: -1
 		})
 	})
 
@@ -99,7 +99,7 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: Page.EnterAmount,
-		  	transactionNumber: -1,
+		  	transactionNumber: -1
 		})
 	})
 
@@ -122,7 +122,7 @@ describe('SendMoney reducer', () => {
 		  	message: 'Done',
 		  	timestamp: '10.10.2017',
 		  	inputPage: Page.PaymentComplete,
-		  	transactionNumber: '000012',
+		  	transactionNumber: '000012'
 		})
 	})
 
@@ -141,7 +141,7 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: Page.Ready,
-		  	transactionNumber: -1,
+		  	transactionNumber: -1
 		})
 	})
 
@@ -160,7 +160,7 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: Page.Ready,
-		  	transactionNumber: -1,
+		  	transactionNumber: -1
 		})
 	})
 })

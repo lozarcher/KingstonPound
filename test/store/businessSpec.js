@@ -1,8 +1,8 @@
 import reducer, { MapViewport } from '../../src/store/reducer/business'
-var chai = require('chai');
-var expect = chai.expect 
-var chaiSubset = require('chai-subset');
-chai.use(chaiSubset);
+var chai = require('chai')
+var expect = chai.expect
+var chaiSubset = require('chai-subset')
+chai.use(chaiSubset)
 
 const initialState = {
   businessList: [],
@@ -14,7 +14,7 @@ const initialState = {
   searchMode: false,
   traderScreenBusinessId: undefined,
   geolocationStatus: null,
-  businessListRef: null,
+  businessListRef: null
 }
 
 describe('Business reducer', () => {
@@ -40,7 +40,7 @@ describe('Business reducer', () => {
 		  	searchMode: false,
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
-		  	businessListRef: null,
+		  	businessListRef: null
 		})
 	})
 
@@ -56,7 +56,7 @@ describe('Business reducer', () => {
 			  	searchMode: false,
 			  	traderScreenBusinessId: undefined,
 			  	geolocationStatus: null,
-			  	businessListRef: null,
+			  	businessListRef: null
 			}, {
 	        	type: 'business/BUSINESS_PROFILE_RECEIVED',
 	        	businessProfile: {id: 1}
@@ -71,7 +71,7 @@ describe('Business reducer', () => {
 		  	searchMode: false,
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
-		  	businessListRef: null,
+		  	businessListRef: null
 		})
 	})
 
@@ -91,7 +91,7 @@ describe('Business reducer', () => {
 		  	searchMode: false,
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
-		  	businessListRef: null,
+		  	businessListRef: null
 		})
 	})
 
@@ -107,7 +107,7 @@ describe('Business reducer', () => {
 			  	searchMode: false,
 			  	traderScreenBusinessId: undefined,
 			  	geolocationStatus: null,
-			  	businessListRef: null,
+			  	businessListRef: null
 			}, {
 	        	type: 'business/SELECT_CLOSEST_BUSINESS'
 	      	})
@@ -121,7 +121,7 @@ describe('Business reducer', () => {
 		  	searchMode: false,
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
-		  	businessListRef: null,
+		  	businessListRef: null
 		})
 	})
 
@@ -137,7 +137,7 @@ describe('Business reducer', () => {
 			  	searchMode: false,
 			  	traderScreenBusinessId: 4,
 			  	geolocationStatus: null,
-			  	businessListRef: null,
+			  	businessListRef: null
 			}, {
 	        	type: 'business/RESET_BUSINESSES'
 	      	})
@@ -160,7 +160,7 @@ describe('Business reducer', () => {
 		  	searchMode: false,
 		  	traderScreenBusinessId: 1,
 		  	geolocationStatus: null,
-		  	businessListRef: null,
+		  	businessListRef: null
 		})
 	})
 
@@ -180,7 +180,7 @@ describe('Business reducer', () => {
 		  	searchMode: true,
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
-		  	businessListRef: null,
+		  	businessListRef: null
 		})
 	})
 
@@ -199,7 +199,7 @@ describe('Business reducer', () => {
 		  	searchMode: false,
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: false,
-		  	businessListRef: null,
+		  	businessListRef: null
 		})
 	})
 
@@ -219,7 +219,7 @@ describe('Business reducer', () => {
 		  	searchMode: false,
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: 'here',
-		  	businessListRef: null,
+		  	businessListRef: null
 		})
 	})
 
@@ -239,7 +239,7 @@ describe('Business reducer', () => {
 		  	searchMode: false,
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
-		  	businessListRef: 'here',
+		  	businessListRef: 'here'
 		})
 	})
 
@@ -255,7 +255,7 @@ describe('Business reducer', () => {
 			  	searchMode: true,
 			  	traderScreenBusinessId: undefined,
 			  	geolocationStatus: null,
-			  	businessListRef: null,
+			  	businessListRef: null
 			}, {
 	        	type: 'navigation/NAVIGATE_TO_TAB'
 	      	})

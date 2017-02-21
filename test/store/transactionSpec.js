@@ -1,9 +1,8 @@
 import reducer from '../../src/store/reducer/transaction'
-import { ListView } from 'react-native'
-var chai = require('chai');
-var expect = chai.expect 
-var chaiSubset = require('chai-subset');
-chai.use(chaiSubset);
+var chai = require('chai')
+var expect = chai.expect
+var chaiSubset = require('chai-subset')
+chai.use(chaiSubset)
 
 const initialState = {
   	refreshing: false,
