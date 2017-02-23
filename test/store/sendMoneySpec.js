@@ -10,7 +10,8 @@ const initialState = {
   message: '',
   timestamp: undefined,
   inputPage: 0,
-  transactionNumber: -1
+  transactionNumber: -1,
+  resetClipboard: false
 }
 
 const Page = {
@@ -100,7 +101,8 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: Page.EnterAmount,
-		  	transactionNumber: -1
+		  	transactionNumber: -1,
+        	resetClipboard: false
 		})
 	})
 
@@ -142,7 +144,8 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: Page.Ready,
-		  	transactionNumber: -1
+		  	transactionNumber: -1,
+          	resetClipboard: true
 		})
 	})
 
