@@ -45,7 +45,8 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: 0,
-		  	transactionNumber: -1
+		  	transactionNumber: -1,
+  			resetClipboard: false
 		})
 	})
 
@@ -64,7 +65,8 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: 0,
-		  	transactionNumber: -1
+		  	transactionNumber: -1,
+  			resetClipboard: false
 		})
 	})
 
@@ -82,7 +84,8 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: 0,
-		  	transactionNumber: -1
+		  	transactionNumber: -1,
+  			resetClipboard: false
 		})
 	})
 
@@ -125,7 +128,8 @@ describe('SendMoney reducer', () => {
 		  	message: 'Done',
 		  	timestamp: '10.10.2017',
 		  	inputPage: Page.PaymentComplete,
-		  	transactionNumber: '000012'
+		  	transactionNumber: '000012',
+  			resetClipboard: false
 		})
 	})
 
@@ -164,7 +168,8 @@ describe('SendMoney reducer', () => {
 		  	message: '',
 		  	timestamp: undefined,
 		  	inputPage: Page.Ready,
-		  	transactionNumber: -1
+		  	transactionNumber: -1,
+  			resetClipboard: false
 		})
 	})
 })
