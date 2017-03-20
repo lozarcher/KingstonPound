@@ -44,37 +44,6 @@ describe('Business reducer', () => {
 		})
 	})
 
-	it('should handle BUSINESS_PROFILE_RECEIVED', () => {
-	    expect(
-	      	reducer({
-			  	businessList: [{id: 0}, {id: 1}],
-			  	businessListTimestamp: null,
-			  	selectedBusinessId: undefined,
-			  	closestBusinesses: [],
-			  	mapViewport: MapViewport,
-			  	forceRegion: MapViewport,
-			  	searchMode: false,
-			  	traderScreenBusinessId: undefined,
-			  	geolocationStatus: null,
-			  	businessListRef: null
-			}, {
-	        	type: 'business/BUSINESS_PROFILE_RECEIVED',
-	        	businessProfile: {id: 1}
-	      	})
-	    ).to.deep.equal({
-		  	businessList: [{id: 0}, {id: 1, profilePopulated: true}],
-		  	businessListTimestamp: null,
-		  	selectedBusinessId: undefined,
-		  	closestBusinesses: [],
-		  	mapViewport: MapViewport,
-		  	forceRegion: MapViewport,
-		  	searchMode: false,
-		  	traderScreenBusinessId: undefined,
-		  	geolocationStatus: null,
-		  	businessListRef: null
-		})
-	})
-
 	it('should handle SELECTED_BUSINESS', () => {
 	    expect(
 	      	reducer(initialState, {
