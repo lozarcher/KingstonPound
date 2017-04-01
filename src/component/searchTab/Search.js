@@ -8,13 +8,14 @@ import BusinessListItem from './BusinessListItem'
 import { CloseButton } from '../common/CloseButton'
 import DraggableList from './DraggableList'
 import ComponentList from './ComponentList'
+import FixedScrollableList from './FixedScrollableList'
 
 import colors from '../../util/colors'
-import { addColorCodes } from '../../util/business'
+import { addColorCodes, getBusinessName } from '../../util/business'
 import searchTabStyle, { maxExpandedHeight, SEARCH_BAR_HEIGHT, SEARCH_BAR_MARGIN } from './SearchTabStyle'
 import { ROW_HEIGHT } from './BusinessListStyle'
 
-const { searchBar, textInput, searchHeaderText, closeButton, expandPanel, nearbyButton } = searchTabStyle.searchTab
+const { searchBar, textInput, searchHeaderText, closeButton, expandPanel, nearbyButton, fixedScrollableListContainer } = searchTabStyle.searchTab
 
 const CLOSE_BUTTON = require('../common/assets/Close.png')
 const NEARBY_BLUE = require('./assets/nearby_blue.png')
@@ -38,18 +39,6 @@ export default class Search extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.allBusinesses !== this.props.allBusinesses) {
-        let changedCount = 0
-        nextProps.allBusinesses.forEach((business, index) => {
-          if (!this.props.allBusinesses[index] || this.props.allBusinesses[index].id !== business.id ) {
-            changedCount++
-          }
-        })
-        // If the change was due to dodgy data, not just because the details were loaded for a business
-        if (changedCount > 1) {
-          this.updateResults(nextProps.allBusinesses)
-        }
-      }
       if (!nextProps.searchMode && this.props.searchMode) {
         this.refs.textInput.blur()
         this.setState({ searchTerms: [], input: null, componentListArray: [] })
@@ -68,7 +57,7 @@ export default class Search extends React.Component {
       }
       this.refs.ExpandPanel && this.refs.ExpandPanel.resetToInitalState()
       const filteredBusinessList = this.state.searchTerms.length
-      ? allBusinesses.filter(business => termsMatch(business.display) || termsMatch(business.shortDisplay))
+      ? _.filter(allBusinesses, business => termsMatch(getBusinessName(business)) || termsMatch(business.fields.username.value))
       : []
       const componentListArray = this.createComponentListArray(filteredBusinessList)
       this.setState({ componentListArray })
@@ -104,7 +93,10 @@ export default class Search extends React.Component {
         list.length = MAX_LIST_LENGTH
       }
       const coloredList = addColorCodes(list)
-      const makePressable = (itemProps) => ({...itemProps, pressable: true})
+      const makePressable = (itemProps) => {
+        itemProps.pressable = true
+        return itemProps
+      }
       const array = this.state.input == null ? [ ...coloredList.map(makePressable) ] : [ `${matches} TRADER MATCHES`, ...coloredList.map(makePressable) ]
       if (cropped) {
         array.push(`${matches - MAX_LIST_LENGTH} ADDITIONAL RESULTS NOT DISPLAYED`)
@@ -123,20 +115,12 @@ export default class Search extends React.Component {
       return (
         <View>
           { searchMode && (
-                  <DraggableList style={expandPanel}
-                                        ref='ExpandPanel'
-                                        topOffset={[ SEARCH_BAR_HEIGHT + SEARCH_BAR_MARGIN ]}
-                                        expandedHeight={maxExpandedHeight}
-                                        childrenHeight={childrenHeight}
-                                        startPosition={0}
-                                        onTouchEnd={hasMoved => componentList && componentList.handleRelease(hasMoved)}
-                                        onTouchStart={location => componentList && componentList.highlightItem(location)}>
-                      <ComponentList
-                          ref='componentList'
-                          items={componentListArray}
-                          componentForItem={ComponentForItem}
-                          onPressItem={index => componentListArray[index].id && this._businessListOnClick(componentListArray[index].id)} />
-                  </DraggableList>
+                <FixedScrollableList
+                    style={fixedScrollableListContainer}
+                    items={componentListArray}
+                    componentForItem={ComponentForItem}
+                    onPress={(id) => this._businessListOnClick(id)}>
+                </FixedScrollableList>
           )}
           <View style={searchBar}>
             <TouchableOpacity style={nearbyButton}
