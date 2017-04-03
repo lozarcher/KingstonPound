@@ -10,6 +10,8 @@ For more information see the GitHub [wiki](https://github.com/ScottLogic/Bristol
   * __React__
   * __react-native-maps__ Maps provided by [airbnb](https://github.com/airbnb/react-native-maps)
 * __eslint__ - static code analysis
+* __fabric__ (crashlytics) - crash reporting and analytics 
+* __cocoapods__ - ios dependency manager
 
 ## Getting Started
 You should fork this project and clone your fork. Ask Colin Eberhardt for access to the repository. When your change is ready to be reviewed push a branch to your fork and create a pull request.
