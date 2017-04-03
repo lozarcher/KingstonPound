@@ -16,6 +16,7 @@ You should fork this project and clone your fork. Ask Colin Eberhardt for access
 
 Before running the application you will need to install install [node](https://nodejs.org/en/download/) as well as the following global npm packages:
 * `npm install react-native-cli -g`
+
 You will also need to install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) and install the dependencies for the Xcode project by running:
 *'cd ios && pod install'
 
