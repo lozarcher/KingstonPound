@@ -18,7 +18,7 @@ Before running the application you will need to install install [node](https://n
 * `npm install react-native-cli -g`
 
 You will also need to install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) and install the dependencies for the Xcode project by running:
-* 'cd ios && pod install'
+* `cd ios && pod install`
 
 ### Running on iPhone emulator:
 First, make sure XCode is installed.
