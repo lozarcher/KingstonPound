@@ -57,7 +57,7 @@ export default class Search extends React.Component {
       }
       this.refs.ExpandPanel && this.refs.ExpandPanel.resetToInitalState()
       const filteredBusinessList = this.state.searchTerms.length
-      ? _.filter(allBusinesses, business => termsMatch(business.name) || termsMatch(business.fields.username))
+      ? _.filter(allBusinesses, business => termsMatch(business.name) || termsMatch(business.fields.username) || (business.fields.description && termsMatch(business.fields.description)))
       : []
       const componentListArray = this.createComponentListArray(filteredBusinessList)
       this.setState({ componentListArray })
