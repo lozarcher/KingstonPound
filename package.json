@@ -41,7 +41,7 @@
     "invariant": "^2.2.2",
     "mocha": "^3.2.0",
     "react-native-mock": "^0.3.1",
-    "remote-redux-devtools": "^0.5.7",
+    "remote-redux-devtools": "0.5.0",
     "sinon": "^1.17.7"
   }
 }
