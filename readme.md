@@ -123,3 +123,37 @@ These are all resolved using the __Android SDK Manager__.
  error: closed
  Could not run adb reverse: Command failed: C:\dev\Android\sdk/platform-tools/adb reverse tcp:8081 tcp:8081
 ```
+
+#### Error: Could not find tools.jar
+```
+:react-native-config:compileReleaseJavaWithJavac FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':react-native-config:compileReleaseJavaWithJavac'.
+> Could not find tools.jar
+```
+* set JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_102 (check your installation).
+
+#### Error: The system cannot find the path specified / Failed to create directory 
+```
+:app:mergeDebugResources FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:mergeDebugResources'.
+> B:\bristolpound.org\BristolPound\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\res\color\abc_primary_text_disable_only_material_light.xml: Error: B:\bristolpound.org\BristolPound\android\app\build\intermediates\res\merged\debug\color\abc_primary_text_disable_only_material_light.xml (The system cannot find the path specified)
+```
+OR
+```
+:app:mergeDebugResources FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:mergeDebugResources'.
+> B:\bristolpound.org\BristolPound\android\app\build\intermediates\res\merged\debug\values-hi\values-hi.xml: Error: Failed to create directory: B:\bristolpound.org\BristolPound\android\app\build\intermediates\res\merged\debug\values-hi
+```
+* Use local directory, rather than a network mapped one
