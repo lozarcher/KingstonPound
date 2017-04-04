@@ -10,36 +10,47 @@ For more information see the GitHub [wiki](https://github.com/ScottLogic/Bristol
   * __React__
   * __react-native-maps__ Maps provided by [airbnb](https://github.com/airbnb/react-native-maps)
 * __eslint__ - static code analysis
+* __fabric__ (crashlytics) - crash reporting and analytics 
+* __cocoapods__ - ios dependency manager
 
 ## Getting Started
 You should fork this project and clone your fork. Ask Colin Eberhardt for access to the repository. When your change is ready to be reviewed push a branch to your fork and create a pull request.
 
-Before running the application you will need to install install [node](https://nodejs.org/en/download/) as well as the following global npm packages:
+Before running the application you will need to __install__
+* [node](https://nodejs.org/en/download/), as well as the following global npm packages:
 * `npm install react-native-cli -g`
-You will also need to install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) and install the dependencies for the Xcode project by running:
-*'cd ios && pod install'
+* `npm install`
 
-### Running on iPhone emulator:
-First, make sure XCode is installed.
+### iOS
+
+You will also need to install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) and install the dependencies for the Xcode project by running:
+* `gem install cocoapods --user-install`
+* `cd ios && pod install`
+
+#### Running on iPhone emulator:
+First, make sure [XCode](https://itunes.apple.com/de/app/xcode/id497799835) is installed.
 * `npm install`
 * open XCode
-* In XCode, open ios/BristolPoundReactNative.xcworkspace
+* In XCode, open ios/BristolPoundReactNative.xc__workspace__ (not: `*.xcodeproj`!)
 * Select a device from the dropdown to the right of the play and stop buttons
 * Press play
 
 There is a very high chance it won't work. One possible reason is the version of XCode, we recommend at least 8.2. If this is not the issue, check the [wiki](https://github.com/ScottLogic/BristolPound/wiki)
 Failing that, google is your friend. Builds are very slow, be patient!
 
-### Setting up an android emulator:
-Android Studio must be used to get an emulator up and running. First Download android studio.
-Create the environment variable ANDROID_HOME with the value C:\Users\<user>\AppData\Local\Android\sdk. Add %ANDROID_HOME%\tools and %ANDROID_HOME%\platform-tools and %ANDROID_HOME%\build-tools\25.0.1 (or whatever version is there) to PATH.
+### Android
+#### Setting up an android emulator:
+Android Studio must be used to get an emulator up and running. First download and install [android studio](https://developer.android.com/studio/index.html).
+Create the environment variables
+* `ANDROID_HOME=%USERPROFILE%\AppData\Local\Android\sdk`
+* `PATH=%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\build-tools\25.0.1;%PATH%` (replace `25.0.1` with whatever version is there) .
 
 Now open android studio and create an empty project. Then open the SDK manager by clicking the button with a blue arrow and an android face. You will need to download at least one android version. Then open the AVD manager by clicking the button with a picture of a phone with a purple screen and an android face. This button will be greyed out if you have not created a new project in android studio! Set up a new emulator, using the x86 image if it asks. Once this is done you can launch the emulator from within android studio or you can run it from the command line with
 `emulator @MyEmulatorName`
 For this to work, make sure that `%ANDROID_HOME%/tools` folder is in your PATH.
 See the  [Android Studio documentation](https://developer.android.com/studio/run/emulator-commandline.html) for more options.
 
-### Connecting an android device
+#### Connecting an android device
 Do not use a loved phone, react-native may destroy it!
 
 Debug mode (the method described here) only works with android 5 or above, but the finished app will run on android >= 4.4
@@ -51,7 +62,7 @@ Debug mode (the method described here) only works with android 5 or above, but t
 
 Now your phone is ready to go!
 
-### Running on android (device or emulator)
+#### Running on android (device or emulator)
 * `adb devices` - you need exactly one device in the list
 * `npm install`
 * `cd android && ./gradlew installDebug` (Bash) or `cd android && gradlew.bat installDebug` (cmd)
