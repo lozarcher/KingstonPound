@@ -5,16 +5,18 @@ var chaiSubset = require('chai-subset')
 chai.use(chaiSubset)
 
 const initialState = {
-  businessList: [],
-  businessListTimestamp: null,
-  selectedBusinessId: undefined,
-  closestBusinesses: [],
-  mapViewport: MapViewport,
-  forceRegion: MapViewport,
-  searchMode: false,
-  traderScreenBusinessId: undefined,
-  geolocationStatus: null,
-  businessListRef: null
+	activeFilters: [],
+  	businessList: [],
+  	businessListTimestamp: null,
+  	selectedBusinessId: undefined,
+  	closestBusinesses: [],
+  	filteredBusinesses: [],
+  	mapViewport: MapViewport,
+	forceRegion: MapViewport,
+	tabMode: 'default',
+	traderScreenBusinessId: undefined,
+	geolocationStatus: null,
+	businessListRef: null
 }
 
 describe('Business reducer', () => {
@@ -32,12 +34,14 @@ describe('Business reducer', () => {
 	        	businessList: []
 	      	})
 	    ).to.containSubset({
+			activeFilters: [],
 		  	businessList: [],
 		  	selectedBusinessId: undefined,
 		  	closestBusinesses: [],
+  			filteredBusinesses: [],
 		  	mapViewport: MapViewport,
 		  	forceRegion: MapViewport,
-		  	searchMode: false,
+		  	tabMode: 'default',
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
 		  	businessListRef: null
@@ -51,13 +55,15 @@ describe('Business reducer', () => {
 	        	businessId: 0
 	      	})
 	    ).to.deep.equal({
+			activeFilters: [],
 		  	businessList: [],
 		  	businessListTimestamp: null,
 		  	selectedBusinessId: 0,
 		  	closestBusinesses: [],
+  			filteredBusinesses: [],
 		  	mapViewport: MapViewport,
 		  	forceRegion: MapViewport,
-		  	searchMode: false,
+		  	tabMode: 'default',
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
 		  	businessListRef: null
@@ -67,13 +73,15 @@ describe('Business reducer', () => {
 	it('should handle SELECT_CLOSEST_BUSINESS', () => {
 	    expect(
 	      	reducer({
+				activeFilters: [],
 			  	businessList: [],
 			  	businessListTimestamp: null,
 			  	selectedBusinessId: 0,
 			  	closestBusinesses: [{id: 1}, {id: 4}],
+  				filteredBusinesses: [],
 			  	mapViewport: MapViewport,
 			  	forceRegion: MapViewport,
-			  	searchMode: false,
+		  		tabMode: 'default',
 			  	traderScreenBusinessId: undefined,
 			  	geolocationStatus: null,
 			  	businessListRef: null
@@ -81,13 +89,15 @@ describe('Business reducer', () => {
 	        	type: 'business/SELECT_CLOSEST_BUSINESS'
 	      	})
 	    ).to.deep.equal({
+			activeFilters: [],
 		  	businessList: [],
 		  	businessListTimestamp: null,
 		  	selectedBusinessId: 1,
 		  	closestBusinesses: [{id: 1}, {id: 4}],
+  			filteredBusinesses: [],
 		  	mapViewport: MapViewport,
 		  	forceRegion: MapViewport,
-		  	searchMode: false,
+		  	tabMode: 'default',
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
 		  	businessListRef: null
@@ -97,13 +107,15 @@ describe('Business reducer', () => {
 	it('should handle RESET_BUSINESSES', () => {
 	    expect(
 	      	reducer({
+				activeFilters: [],
 			  	businessList: [{id: 0}, {id: 1}],
 			  	businessListTimestamp: null,
 			  	selectedBusinessId: undefined,
 			  	closestBusinesses: [{id: 1}, {id: 4}],
+  				filteredBusinesses: [],
 			  	mapViewport: MapViewport,
 			  	forceRegion: MapViewport,
-			  	searchMode: false,
+		  		tabMode: 'default',
 			  	traderScreenBusinessId: 4,
 			  	geolocationStatus: null,
 			  	businessListRef: null
@@ -120,33 +132,37 @@ describe('Business reducer', () => {
 	        	id: 1
 	      	})
 	    ).to.deep.equal({
+			activeFilters: [],
 		  	businessList: [],
 		  	businessListTimestamp: null,
 		  	selectedBusinessId: undefined,
 		  	closestBusinesses: [],
+  			filteredBusinesses: [],
 		  	mapViewport: MapViewport,
 		  	forceRegion: MapViewport,
-		  	searchMode: false,
+		  	tabMode: 'default',
 		  	traderScreenBusinessId: 1,
 		  	geolocationStatus: null,
 		  	businessListRef: null
 		})
 	})
 
-	it('should handle UPDATE_SEARCH_MODE', () => {
+	it('should handle UPDATE_TAB_MODE', () => {
 	    expect(
 	      	reducer(initialState, {
-	        	type: 'business/UPDATE_SEARCH_MODE',
-	        	mode: true
+	        	type: 'business/UPDATE_TAB_MODE',
+	        	mode: 'search'
 	      	})
 	    ).to.deep.equal({
+			activeFilters: [],
 		  	businessList: [],
 		  	businessListTimestamp: null,
 		  	selectedBusinessId: undefined,
 		  	closestBusinesses: [],
+  			filteredBusinesses: [],
 		  	mapViewport: MapViewport,
 		  	forceRegion: MapViewport,
-		  	searchMode: true,
+		  	tabMode: 'search',
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
 		  	businessListRef: null
@@ -159,13 +175,15 @@ describe('Business reducer', () => {
 	        	type: 'business/GEOLOCATION_FAILED'
 	      	})
 	    ).to.deep.equal({
+			activeFilters: [],
 		  	businessList: [],
 		  	businessListTimestamp: null,
 		  	selectedBusinessId: undefined,
 		  	closestBusinesses: [],
+  			filteredBusinesses: [],
 		  	mapViewport: MapViewport,
 		  	forceRegion: MapViewport,
-		  	searchMode: false,
+		  	tabMode: 'default',
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: false,
 		  	businessListRef: null
@@ -179,13 +197,15 @@ describe('Business reducer', () => {
 	        	location: 'here'
 	      	})
 	    ).to.deep.equal({
+			activeFilters: [],
 		  	businessList: [],
 		  	businessListTimestamp: null,
 		  	selectedBusinessId: undefined,
 		  	closestBusinesses: [],
+  			filteredBusinesses: [],
 		  	mapViewport: MapViewport,
 		  	forceRegion: MapViewport,
-		  	searchMode: false,
+		  	tabMode: 'default',
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: 'here',
 		  	businessListRef: null
@@ -199,13 +219,15 @@ describe('Business reducer', () => {
 	        	ref: 'here'
 	      	})
 	    ).to.deep.equal({
+			activeFilters: [],
 		  	businessList: [],
 		  	businessListTimestamp: null,
 		  	selectedBusinessId: undefined,
 		  	closestBusinesses: [],
+  			filteredBusinesses: [],
 		  	mapViewport: MapViewport,
 		  	forceRegion: MapViewport,
-		  	searchMode: false,
+		  	tabMode: 'default',
 		  	traderScreenBusinessId: undefined,
 		  	geolocationStatus: null,
 		  	businessListRef: 'here'
@@ -215,13 +237,15 @@ describe('Business reducer', () => {
 	it('should handle navigation/NAVIGATE_TO_TAB', () => {
 	    expect(
 	      	reducer({
+				activeFilters: [],
 			  	businessList: [],
 			  	businessListTimestamp: null,
 			  	selectedBusinessId: undefined,
 			  	closestBusinesses: [],
+  				filteredBusinesses: [],
 			  	mapViewport: MapViewport,
 			  	forceRegion: MapViewport,
-			  	searchMode: true,
+			  	tabMode: 'search',
 			  	traderScreenBusinessId: undefined,
 			  	geolocationStatus: null,
 			  	businessListRef: null
