@@ -9,8 +9,7 @@ const initialState = {
   	selectedMonthIndex: 0,
   	loadingTransactions: false,
   	transactions: [],
-  	monthlyTotalSpent: [],
-  	spendingListRef: null
+  	monthlyTotalSpent: []
 }
 
 describe('Transaction reducer', () => {
@@ -31,8 +30,7 @@ describe('Transaction reducer', () => {
 		  	selectedMonthIndex: 0,
 		  	loadingTransactions: true,
 		  	transactions: [],
-		  	monthlyTotalSpent: [],
-		  	spendingListRef: null
+		  	monthlyTotalSpent: []
 		})
 	})
 
@@ -46,8 +44,7 @@ describe('Transaction reducer', () => {
 		  	selectedMonthIndex: 0,
 		  	loadingTransactions: false,
 		  	transactions: [],
-		  	monthlyTotalSpent: [],
-		  	spendingListRef: null
+		  	monthlyTotalSpent: []
 		})
 	})
 
@@ -75,22 +72,10 @@ describe('Transaction reducer', () => {
 			  	selectedMonthIndex: 0,
 			  	loadingTransactions: true,
 			  	transactions: [],
-			  	monthlyTotalSpent: [],
-			  	spendingListRef: null
+			  	monthlyTotalSpent: []
 			}, {
 	        	type: 'transaction/FAILED_TO_LOAD'
 	      	})
 	    ).to.containSubset(initialState)
-	})
-
-	it('should handle REGISTER_LIST', () => {
-	    expect(
-	      	reducer(initialState, {
-	        	type: 'transaction/REGISTER_LIST',
-	        	ref: 'hello'
-	      	})
-	    ).to.containSubset({
-		  	spendingListRef: 'hello'
-		})
 	})
 })
