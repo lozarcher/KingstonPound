@@ -10,8 +10,8 @@
  */
 
 function addressToString (address) {
-	const addressLine2 = [address.buildingNumber, address.street].filter(a => a).join(', ')
-  	return [address.addressLine1, addressLine2, address.addressLine3, address.zip]
+	const addressLine2 = [address.buildingNumber, address.street].filter(a => a).join(', ');
+  	return [address.addressLine1, addressLine2, address.addressLine3, address.townOrCity, address.postcode]
     	.filter(a => a)
     	.join(', ')
 }
