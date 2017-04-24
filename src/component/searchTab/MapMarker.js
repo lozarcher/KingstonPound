@@ -1,7 +1,7 @@
 import React from 'react'
 import { Marker } from 'react-native-maps'
 import platform from '../../util/Platforms'
-import { Image } from 'react-native'
+import { Image, View } from 'react-native'
 import DefaultText from '../DefaultText'
 
 const markerImage = require('./assets/marker.png')
@@ -31,7 +31,7 @@ const getClusterImage = (pointCount, selected) => {
 
 const MapMarker = ({ coordinate, selected, onPress, pointCount }) => {
   if (pointCount) {
-    const marginTop = pointCount > 99 ? 5 : pointCount > 9 ? 4 : 7/3
+    const marginTop = pointCount > 99 ? 5 : pointCount > 9 ? 3 : 7/3
     const marginLeft = pointCount > 99 ? 14.5 : pointCount > 9 ? 13 : 12.5
     const fontSize = pointCount > 9 ? 13 : 12
     return <Marker
@@ -39,9 +39,11 @@ const MapMarker = ({ coordinate, selected, onPress, pointCount }) => {
         onPress={onPress}
         anchor={platform.isIOS() ? null : { x: 0.5, y: 0.5 }}
         image={getClusterImage(pointCount, selected)}>
-        <DefaultText style={{ color: 'white', fontSize, marginTop, marginLeft }}>
-          {pointCount}
-        </DefaultText>
+        <View>
+          <DefaultText style={{ color: 'white', fontSize, marginTop, marginLeft }}>
+            {pointCount}
+          </DefaultText>
+        </View>
     </Marker>
   }
 
