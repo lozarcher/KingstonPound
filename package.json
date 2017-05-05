@@ -15,8 +15,8 @@
     "lodash": "^4.15.0",
     "moment": "^2.15.0",
     "org.bristolpound.cyclos.api.directory": "git+https://code.bristolpound.org/cyclos-scripts/directory-api-JS.git#v1.0.1",
-    "react": "^15.5.0",
-    "react-native": "^0.42.3",
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.44.0",
     "react-native-communications": "^2.1.4",
     "react-native-config": "^0.3.1",
     "react-native-fabric": "^0.4.1",
@@ -35,12 +35,10 @@
     "babel-preset-react-native": "^1.9.1",
     "chai": "^3.5.0",
     "chai-subset": "^1.4.0",
-    "enzyme": "^2.7.1",
     "eslint": "^3.2.2",
     "eslint-plugin-react": "^6.0.0",
     "invariant": "^2.2.2",
     "mocha": "^3.2.0",
-    "react-native-mock": "^0.3.1",
     "remote-redux-devtools": "0.5.0",
     "sinon": "^1.17.7"
   }
