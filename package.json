@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-	"winInstallDebug": "android\\winInstallDebug.bat",
-	"winBuildClean": "android\\winBuildClean.bat",
-    "test": "eslint src/**/*.js test/**/*.js --fix ; mocha test/**/*.js --require react-native-mock/mock.js --compilers js:babel-core/register"
+    "winInstallDebug": "android\\winInstallDebug.bat",
+    "winBuildClean": "android\\winBuildClean.bat",
+    "test": "eslint src/**/*.js test/**/*.js --fix ; mocha --opts test/mocha.opts"
   },
   "dependencies": {
     "base-64": "^0.1.0",
@@ -33,6 +33,7 @@
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
     "babel-preset-react-native": "^1.9.1",
+    "babel-preset-es2015": "^6.5.0",
     "chai": "^3.5.0",
     "chai-subset": "^1.4.0",
     "eslint": "^3.8.1",
