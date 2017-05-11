@@ -37,6 +37,7 @@ Podfile.lock
 .idea
 .gradle
 local.properties
+android/app/src/main/gen/
 *.keystore
 *.apk
 
