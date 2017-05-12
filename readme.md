@@ -12,6 +12,7 @@ For more information see the GitHub [wiki](https://github.com/ScottLogic/Bristol
 * __eslint__ - static code analysis
 * __fabric__ (crashlytics) - crash reporting and analytics 
 * __cocoapods__ - ios dependency manager
+* __Expo__ - set of tools to allow easy development for both iOS & Android [expo](https://expo.io/)
 
 ## Getting Started
 You should fork this project and clone your fork. Ask Colin Eberhardt for access to the repository. When your change is ready to be reviewed push a branch to your fork and create a pull request.
@@ -19,27 +20,10 @@ You should fork this project and clone your fork. Ask Colin Eberhardt for access
 Before running the application you will need to __install__
 * [node](https://nodejs.org/en/download/), as well as the following global npm packages:
 * `npm install react-native-cli -g`
-* `npm install`
+* [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
+* `npm install exp --global` [Expo](https://expo.io/)
 
-### iOS
-
-You will also need to install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) and install the dependencies for the Xcode project by running:
-* `gem install cocoapods --user-install`
-* `cd ios && pod install`
-
-#### Running on iPhone emulator:
-First, make sure [XCode](https://itunes.apple.com/de/app/xcode/id497799835) is installed.
-* `npm install`
-* open XCode
-* In XCode, open ios/BristolPoundReactNative.xc__workspace__ (not: `*.xcodeproj`!)
-* Select a device from the dropdown to the right of the play and stop buttons
-* Press play
-
-There is a very high chance it won't work. One possible reason is the version of XCode, we recommend at least 8.2. If this is not the issue, check the [wiki](https://github.com/ScottLogic/BristolPound/wiki)
-Failing that, google is your friend. Builds are very slow, be patient!
-
-### Android
-#### Setting up an android emulator:
+#### Android - Setting up an android emulator:
 Android Studio must be used to get an emulator up and running. First download and install [android studio](https://developer.android.com/studio/index.html).
 Create the environment variables
 * `ANDROID_HOME=%USERPROFILE%\AppData\Local\Android\sdk`
@@ -50,27 +34,25 @@ Now open android studio and create an empty project. Then open the SDK manager b
 For this to work, make sure that `%ANDROID_HOME%/tools` folder is in your PATH.
 See the  [Android Studio documentation](https://developer.android.com/studio/run/emulator-commandline.html) for more options.
 
-#### Connecting an android device
-Do not use a loved phone, react-native may destroy it!
-
-Debug mode (the method described here) only works with android 5 or above, but the finished app will run on android >= 4.4
-* Connect with USB cable
-* scroll down to `about phone` and tap about 7 times to enable dev options
-* open dev options. About half way down, there is an option for USB connection mode. Select PTP. This will have to be done every time the phone is connected (really annoying)
-* `adb devices` to check phone has been detected
-* `adb reverse tcp:8081 tcp:8081`
-
-Now your phone is ready to go!
-
-#### Running on android (device or emulator)
-* `adb devices` - you need exactly one device in the list
+### Running the app on a device (Android/iOS)
+* set environment variable REACT_NATIVE_PACKAGER_HOSTNAME to your ip eg. `REACT_NATIVE_PACKAGER_HOSTNAME="192.168.52.59"`
+* make sure your device is connected to the same network as your pc
 * `npm install`
-* `cd android && ./gradlew installDebug` (Bash) or `cd android && gradlew.bat installDebug` (cmd)
+* `npm start`
+* download the Expo app on your device from App Store/Google Play
+* open the Expo app and point to the QR code generated in terminal
+* app runs on your device!
 
-If this fails, try a few more times before concluding something is wrong. Wait until the installation completes before starting the packager
-* `cd .. && react-native start` - starts the packager
+### iOS - Running the app on iPhone emulator
+* make sure [XCode](https://itunes.apple.com/de/app/xcode/id497799835) is installed.
+* `npm run ios` -> will also start the simulator
+* input the app address in the Expo app in the simulator
 
-Now that the app is installed, open it. if it does not work shake the phone and select 'reload'. For emulators, press 'r' twice in quick succession to reload the app
+### Android - Running the app on Android emulator:
+* make sure you set up your Android emulator
+* open an Android emulator
+* `npm run android` 
+* input the app address in the Expo app
 
 ## OS Versions supported
 
@@ -82,7 +64,7 @@ This project supports iOS and Android with the following constraints:
 See [#32]([https://github.com/ScottLogic/BristolPound/issues/32) for further details and commentary.
 
 ## Debugging
-The easiest way is to run `react-native log-android` or `react-native log-ios`. These commands simply print the logs in the console. For android errors, `adb logcat *:E` and `adb logcat *:F` are occasionally useful, but not in the general case. Check the [wiki](https://github.com/ScottLogic/BristolPound/wiki) for more tips
+Expo makes the app print the logs in the console. For more options check the [expo docs](https://docs.expo.io/versions/v16.0.0/guides/debugging.html)
 
 ### Crash Reports ###
 * The app has integrated Crashlytics with Fabric for both Android and iOS, which register all app crashes 
