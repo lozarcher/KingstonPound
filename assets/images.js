@@ -45,7 +45,7 @@ const images = {
     selectedTrader: require('./searchTab/selected_trader.png'),
     shopping: require('./searchTab/shopping.png'),
     tick: require('./searchTab/Tick.png'),
-    visitingBristol: require('./searchTab/visitingbristol.png'),
+    visitingTheCity: require('./searchTab/visitingthecity.png'),
     balanceSymbol: require('./tabbar/balance_symbol.png'),
     meActive: require('./tabbar/Me_active.png'),
     meInactive: require('./tabbar/Me_inactive.png'),
