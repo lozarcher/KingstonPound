@@ -52,4 +52,4 @@ buck-out/
 android/app/libs
 *.keystore
 
-.expo/
+.expo/*
