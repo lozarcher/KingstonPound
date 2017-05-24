@@ -12,6 +12,7 @@
     "test": "eslint CityPoundSourceCode/src/**/*.js CityPoundSourceCode/test/**/*.js --fix ; mocha --opts CityPoundSourceCode/test/mocha.opts"
   },
   "dependencies": {
-    "expo": "^16.0.0"
+    "expo": "^17.0.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz"
   }
 }
