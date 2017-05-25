@@ -18,10 +18,33 @@ For more information see the GitHub [wiki](https://github.com/ScottLogic/Bristol
 You should fork this project and clone your fork. Ask Colin Eberhardt for access to the repository. When your change is ready to be reviewed push a branch to your fork and create a pull request.
 
 Before running the application you will need to __install__
-* [node](https://nodejs.org/en/download/), as well as the following global npm packages:
-* `npm install react-native-cli -g`
-* [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
+* [node](https://nodejs.org/en/download/)
 * `npm install exp --global` [Expo](https://expo.io/)
+
+In order to obtain the shared source code locally, you must first initialise the git submodule:
+* `git submodule init`
+* `git submodule update`
+
+### Contributing
+To ensure you have the latest changes within the shared submodule, you can do either of the following: 
+
+`git submodule update --remote` (from the outer repo)
+
+__or__
+
+`git pull origin master` (from within the submodule repo)
+
+__Note:__ leave off the `--remote` to remain checked out at the same commit (listed in the superproject) whilst fetching all the new data.
+
+
+At first, the submodule will be in a "detached HEAD" state. In order to contribute, check out a branch within the submodule so there will be a working branch tracking the changes. You can then incorporate changes from upstream into the working branch with:
+
+`git submodule update --remote --merge` (from the outer repo)
+
+Changes to the submodule repo can be pushed from within that directory as normal. However, it is important not to push any changes to the superproject (outer repo) without also pushing the submodule, else the commit it references will not be available to other users. This can be avoided by pushing from the outer repo as follows: 
+
+`git push --recurse-submodules=check`
+
 
 #### Android - Setting up an android emulator:
 Android Studio must be used to get an emulator up and running. First download and install [android studio](https://developer.android.com/studio/index.html).
