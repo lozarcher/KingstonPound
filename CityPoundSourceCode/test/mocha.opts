@@ -1,4 +1,0 @@
---compilers js:./CityPoundSourceCode/test/compiler
---require ./CityPoundSourceCode/test/setup.js
---recursive
- CityPoundSourceCode/test/**/*.js

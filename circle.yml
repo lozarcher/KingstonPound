@@ -6,6 +6,11 @@ dependencies:
   override:
     - npm install
 
+checkout:
+  post:
+    - git submodule sync --recursive
+    - git submodule update --recursive --init
+
 test:
   pre:
   override:
