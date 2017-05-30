@@ -20,7 +20,8 @@
       "versionCode": 7,
       "config": {
         "fabric": {
-          "apiKey": "***REMOVED***"
+          "apiKey": "***REMOVED***",
+          "buildSecret": "***REMOVED***"
         },
         "googleMaps" : {
           "apiKey": "***REMOVED***"
