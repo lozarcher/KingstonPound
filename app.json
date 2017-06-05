@@ -2,13 +2,13 @@
   "expo": {
     "sdkVersion": "17.0.0",
     "name": "Bristol Pound",
-    "version": "0.0.35",
+    "version": "3.0.0",
     "icon":"./assets/icon/ic_launcher.png",
     "orientation": "portrait",
     "slug": "bristolpound",
     "privacy": "unlisted",
     "ios": {
-      "bundleIdentifier": "com.bristolpound",
+      "bundleIdentifier": "org.bristolpound.mobile.rn.ios",
       "buildNumber": "1",
       "supportsTablet": true,
       "config": {
@@ -16,8 +16,8 @@
       }
     },
     "android": {
-      "package": "com.bristolpoundrn",
-      "versionCode": 7,
+      "package": "org.bristolpound.mobile.rn.android",
+      "versionCode": 1,
       "config": {
         "fabric": {
           "apiKey": "***REMOVED***",
