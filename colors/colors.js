@@ -18,7 +18,8 @@ const colors = {
   white: '#FFFFFF',
   pink: '#DD1565',
   lightGray: '#eee',
-  transparent: '#00000000'
+  transparent: '#00000000',
+  red: 'red'
 }
 
 export default colors
