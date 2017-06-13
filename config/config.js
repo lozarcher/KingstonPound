@@ -5,7 +5,8 @@ const config={
     BASE_URL: 'https://bristol-stage.community-currency.org/cyclos/bristolpound/api/',
     APP_CITY: 'Bristol',
     APP_WEBSITE: 'http://bristolpound.org',
-    TXT2PAY_NO: '+44 7441 906260'
+    TXT2PAY_NO: '+44 7441 906260',
+    ALLOW_LOGIN: true
 }
 
 export default config
