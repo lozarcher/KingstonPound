@@ -9,6 +9,7 @@ const images = {
     website: require('./businessDetails/Website.png'),
     close: require('./common/Close.png'),
     closeBlue: require('./common/Close_Blue.png'),
+    expandTab: require('./common/Expand_Tab.png'),
     shape: require('./common/Shape.png'),
     account: require('./loggedOutState/Account.png'),
     map: require('./loggedOutState/Map.png'),
