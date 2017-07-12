@@ -52,6 +52,3 @@ buck-out/
 android/app/libs
 *.keystore
 .expo
-.expo/*
-.expo/packager-info.json
-.expo/settings.json
