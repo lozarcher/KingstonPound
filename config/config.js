@@ -16,7 +16,8 @@ const config={
     APP_CITY: 'Bristol',
     APP_WEBSITE: 'https://bristolpound.org',
     TXT2PAY_NO: '+44 7441 906260',
-    ALLOW_LOGIN: true
+    ALLOW_LOGIN: true,
+	APP_VERSION: '3.0.3'
 }
 
 // ToDo: needs to be replaced at some point with a CyclosHost object, similar to the config in DirectoryAPI
