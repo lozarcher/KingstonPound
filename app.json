@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "18.0.0",
     "name": "Bristol Pound",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "icon":"./assets/icon/ic_launcher.png",
     "orientation": "portrait",
     "slug": "bristolpound",
