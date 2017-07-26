@@ -33,6 +33,7 @@ const images = {
     cluster: require('./searchTab/cluster.png'),
     filtersDisabled: require('./searchTab/filters_disabled.png'),
     filters: require('./searchTab/filters.png'),
+    cashpoint: require('./searchTab/cashpoint.png'),
     foodanddrink: require('./searchTab/foodanddrink.png'),
     foryourbusiness: require('./searchTab/foryourbusiness.png'),
     foryourhome: require('./searchTab/foryourhome.png'),
