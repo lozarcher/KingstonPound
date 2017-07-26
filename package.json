@@ -4,7 +4,7 @@
   "private": true,
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "install": "npm install CityPoundSourceCode && rm -rf node_modules/CityPoundSourceCode",
+    "install": "npm install CityPoundSourceCode; rm -rf node_modules/CityPoundSourceCode",
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
