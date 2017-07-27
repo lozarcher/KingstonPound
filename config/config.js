@@ -17,6 +17,8 @@ const config={
     APP_WEBSITE: 'https://bristolpound.org',
     TXT2PAY_NO: '+44 7441 906260',
     ALLOW_LOGIN: true
+    , CASH_POINT_1: 'This is a cash point, where you can swap Sterling for Bristol Pounds.'
+    , CASH_POINT_2: 'This is a cash point, where you can swap Sterling for Bristol Pounds.'
 }
 
 // ToDo: needs to be replaced at some point with a CyclosHost object, similar to the config in DirectoryAPI
