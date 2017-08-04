@@ -56,3 +56,5 @@ buck-out/
 android/app/libs
 *.keystore
 .expo
+
+config/secrets\.js

@@ -1,7 +1,8 @@
-import { normaliseConfigurations } from '../CityPoundSourceCode/src/util/config'
-
 // export this to see the original selection
 export const flavour = 'staging'
+
+// use the secrets
+export const secrets = true
 
 // the base configuration
 export const default_config={
@@ -34,16 +35,19 @@ export const configurations={
     },
     development: {
         APP_CURRENCY: 'Bristol Devel',
+        CYCLOS: {
+            host: 'dev-bristol.community-currency.org',
+            channel: 'BristolPoundApp{CHANNEL_SECRET}',
+        },
     },
-    release: {
+    production: {
         APP_CURRENCY: 'Bristol Pound',
         TXT2PAY_NO: '+44 7441 900 333​',
         CYCLOS: {
-              host: 'bristol.community-currency.org',
+            host: 'bristol.community-currency.org',
+            channel: 'BristolPoundApp{CHANNEL_SECRET}',
         }
 	}
 }
 
-const config = normaliseConfigurations(configurations, flavour, default_config)
-
-export default config
+export default config = {}
