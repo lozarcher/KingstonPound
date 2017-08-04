@@ -57,4 +57,4 @@ android/app/libs
 *.keystore
 .expo
 
-assets/icon/ic_launcher\.*x*\.png
+config/secrets\.js
