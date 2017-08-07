@@ -24,8 +24,8 @@ export const default_config={
     },
     ALLOW_LOGIN: true,
     DEFAULT_COORDINATES: { latitude: 51.454513, longitude:  -2.58791 },
-    CASH_POINT_1: 'This is a cash point, where you can swap Sterling for Bristol Pounds.',
-    CASH_POINT_2: 'This is a cash point, where you can swap Sterling for Bristol Pounds.'
+    CASH_POINT_1: 'Here everyone can swap Sterling for Bristol Pounds, account holders can withdraw paper notes and businesses can deposit them.',
+    CASH_POINT_2: 'Here everyone can swap Sterling for Bristol Pounds.'
 }
 
 // customisations for individual flavours are added here
