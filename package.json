@@ -9,7 +9,7 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "eslint CityPoundSourceCode/src/**/*.js CityPoundSourceCode/test/**/*.js --fix ; mocha --opts CityPoundSourceCode/test/mocha.opts"
+    "test": "eslint CityPoundSourceCode/src/**/*.js CityPoundSourceCode/test/**/*.js --fix && mocha --opts CityPoundSourceCode/test/mocha.opts"
   },
   "dependencies": {
     "expo": "^18.0.1",
