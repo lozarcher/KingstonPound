@@ -10,7 +10,6 @@ export const default_config={
     APP_CURRENCY: 'Bristol Default',
     APP_WEBSITE: 'https://bristolpound.org',
     TXT2PAY_NO: '+44 7441 906260',
-<<<<<<< HEAD
     CYCLOS: {
         host: 'bristol-stage.community-currency.org',
         cyclosPrefix: 'cyclos',
