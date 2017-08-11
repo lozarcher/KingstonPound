@@ -10,6 +10,7 @@ export const default_config={
     APP_CURRENCY: 'Bristol Default',
     APP_WEBSITE: 'https://bristolpound.org',
     TXT2PAY_NO: '+44 7441 906260',
+<<<<<<< HEAD
     CYCLOS: {
         host: 'bristol-stage.community-currency.org',
         cyclosPrefix: 'cyclos',
@@ -23,6 +24,7 @@ export const default_config={
         wsPrefix: ''
     },
     ALLOW_LOGIN: true,
+    APP_VERSION: '4.0.0'
     DEFAULT_COORDINATES: { latitude: 51.454513, longitude:  -2.58791 },
     CASH_POINT_1: 'Here everyone can swap Sterling for Bristol Pounds, account holders can withdraw paper notes and businesses can deposit them.',
     CASH_POINT_2: 'Here everyone can swap Sterling for Bristol Pounds.'
