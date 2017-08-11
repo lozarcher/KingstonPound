@@ -2,16 +2,11 @@ const images = {
     background: require('./background/background.png'),
     address: require('./businessDetails/Address.png'),
     email: require('./businessDetails/Email.png'),
-    facebook: require('./businessDetails/Facebook.png'),
-    linkedin: require('./businessDetails/Linkedin.png'),
-    phone: require('./businessDetails/Phone.png'),
-    twitter: require('./businessDetails/Twitter.png'),
     website: require('./businessDetails/Website.png'),
     deal: require('./businessDetails/Deal.png'),
     cashpoint1: require('./businessDetails/cashpoint1.png'),
     cashpoint2: require('./businessDetails/cashpoint2.png'),
     opening: require('./businessDetails/Opening.png'),
-    flickr: require('./businessDetails/Flickr.png'),
     close: require('./common/Close.png'),
     closeBlue: require('./common/Close_Blue.png'),
     expandTab: require('./common/Expand_Tab.png'),
@@ -58,7 +53,17 @@ const images = {
     searchActive: require('./tabbar/Search_active.png'),
     searchInactive: require('./tabbar/Search_inactive.png'),
     spendingActive: require('./tabbar/Spending_active.png'),
-    spendingInactive: require('./tabbar/Spending_inactive.png')
+    spendingInactive: require('./tabbar/Spending_inactive.png'),
+    businessDetails: {
+      addresses: require('./businessDetails/Address.png'),
+      businessemail: require('./businessDetails/Email.png'),
+      facebook: require('./businessDetails/Facebook.png'),
+      linkedin: require('./businessDetails/Linkedin.png'),
+      businessphone: require('./businessDetails/Phone.png'),
+      twitter: require('./businessDetails/Twitter.png'),
+      businesswebsite: require('./businessDetails/Website.png'),
+      flickr: require('./businessDetails/Flickr.png'),
+    }
 };
 
 export default images;
