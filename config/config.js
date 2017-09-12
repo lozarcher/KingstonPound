@@ -14,13 +14,14 @@ export const default_config={
         host: 'bristol-stage.community-currency.org',
         cyclosPrefix: 'cyclos',
         network: 'bristolpound',
-        wsPrefix: ''
+        wsPrefix: '',
+        channel: 'BristolPoundApp{CHANNEL_SECRET}',
     },
     DIRECTORY: {
         host: 'api.bristolpound.org',
         cyclosPrefix: '',
         network: '',
-        wsPrefix: ''
+        wsPrefix: '',
     },
     ALLOW_LOGIN: true,
     DEFAULT_COORDINATES: { latitude: 51.454513, longitude:  -2.58791 },
@@ -37,7 +38,6 @@ export const configurations={
         APP_CURRENCY: 'Bristol Devel',
         CYCLOS: {
             host: 'dev-bristol.community-currency.org',
-            channel: 'BristolPoundApp{CHANNEL_SECRET}',
         },
     },
     production: {
@@ -45,7 +45,6 @@ export const configurations={
         TXT2PAY_NO: '+44 7441 900 333​',
         CYCLOS: {
             host: 'bristol.community-currency.org',
-            channel: 'BristolPoundApp{CHANNEL_SECRET}',
         }
 	}
 }
