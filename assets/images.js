@@ -15,6 +15,8 @@ const images = {
     close: require('./common/Close.png'),
     closeBlue: require('./common/Close_Blue.png'),
     expandTab: require('./common/Expand_Tab.png'),
+    check_box_blank: require('./icon/ic_check_box_outline_blank.png'),
+    check_box: require('./icon/ic_check_box.png'),
     shape: require('./common/Shape.png'),
     account: require('./loggedOutState/Account.png'),
     map: require('./loggedOutState/Map.png'),
