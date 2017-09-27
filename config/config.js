@@ -23,7 +23,7 @@ export const default_config={
         cyclosPrefix: '',
         network: '',
         wsPrefix: '',
-        apiVersion: '0.3'
+        apiVersion: '2'
     },
     ALLOW_LOGIN: true,
     DEFAULT_COORDINATES: { latitude: 51.454513, longitude:  -2.58791 },
