@@ -36,6 +36,7 @@ const images = {
     filtersDisabled: require('./searchTab/filters_disabled.png'),
     filters: require('./searchTab/filters.png'),
     cashpoint: require('./searchTab/cashpoint.png'),
+    cashpointTransparent: require('./searchTab/cashpointTransparent.png'),
     foodanddrink: require('./searchTab/foodanddrink.png'),
     foryourbusiness: require('./searchTab/foryourbusiness.png'),
     foryourhome: require('./searchTab/foryourhome.png'),
