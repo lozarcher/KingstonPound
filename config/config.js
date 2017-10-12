@@ -27,6 +27,7 @@ export const default_config={
     },
     ALLOW_LOGIN: true,
     DEFAULT_COORDINATES: { latitude: 51.454513, longitude:  -2.58791 },
+    MAP_MAX_DISTANCE: 75,
     CASH_POINT_1: 'Here everyone can swap Sterling for Bristol Pounds, account holders can withdraw paper notes and businesses can deposit them.',
     CASH_POINT_2: 'Here everyone can swap Sterling for Bristol Pounds.'
 }
