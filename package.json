@@ -4,12 +4,12 @@
   "private": true,
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "install": "npm install CityPoundSourceCode && rm -rf node_modules/CityPoundSourceCode",
+    "install": "npm install TownPoundCore && rm -rf node_modules/TownPoundCore",
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "eslint CityPoundSourceCode/src/**/*.js CityPoundSourceCode/test/**/*.js --fix && mocha --opts CityPoundSourceCode/test/mocha.opts"
+    "test": "eslint TownPoundCore/src/**/*.js TownPoundCore/test/**/*.js --fix && mocha --opts TownPoundCore/test/mocha.opts"
   },
   "dependencies": {
     "expo": "^18.0.1",

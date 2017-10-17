@@ -1,5 +1,5 @@
 import React from 'react'
-import Module from './CityPoundSourceCode/Module'
+import Module from './TownPoundCore/Module'
 import { Font } from 'expo';
 
 class App extends React.Component {
