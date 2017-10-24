@@ -25,14 +25,14 @@
     "react/react-in-jsx-scope": 2,
     "no-undef": 2,
     "no-unused-vars": 0,
-    "comma-dangle": 2,
+    "comma-dangle": 0,
     "no-console": 2,
     "no-mixed-spaces-and-tabs": 0,
     "key-spacing": 2,
     "eol-last": 2,
     "no-trailing-spaces": 2,
     "space-before-blocks": 2,
-    "space-before-function-paren": 2,
+    "space-before-function-paren": 0,
     "spaced-comment": 2
   },
   "plugins": [
